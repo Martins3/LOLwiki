@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QJsonObject>
 #include <iostream>
+#include <string>
 #include "summonerdata.h"
 
 Summoner::Summoner()
@@ -66,18 +67,15 @@ QString Summoner::getImage()
 QVariant Summoner::getListModel()
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM Summoner");
+    query.prepare("SELECT * FROM SummonerSpell");
     query.exec();
     dataList.clear();
     while(query.next()) {
+
         QString id = query.value(0).toString();
-        QString image = query.value(3).toJsonObject().begin().value().toString();
+        QString image = QString::fromStdString(std::string("Spell/")) + query.value(3).toString();
         QString des = query.value(2).toString();
         int cooldown = query.value(1).toInt();
-        // fuck img_name
-        qDebug() << image << endl;
-        image = QString("Summoner/SummonerBarrier.png");
-
         dataList.append(new SummonerData(id, image, des, cooldown));
     }
 
