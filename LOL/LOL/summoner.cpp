@@ -38,7 +38,6 @@ QVariant Summoner::getItemListModel()
     return QVariant::fromValue(dataList);
 }
 
-// handler can solve everything, it should be complex !
 void Summoner::handler(const QString &id, const QString &new_id)
 {
     qDebug() << "call the handler to access the database";

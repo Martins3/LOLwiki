@@ -16,8 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     summoner.cpp \
     summonerdata.cpp \
-    backend.cpp \
-    backend.cpp \
     main.cpp \
     summoner.cpp \
     summonerdata.cpp \
@@ -39,8 +37,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     summonerdata.h \
     summoner.h \
-    backend.h \
-    backend.h \
     summoner.h \
     summonerdata.h \
     itemdata.h
