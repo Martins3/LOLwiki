@@ -11,3 +11,8 @@ private:
 };
 
 #endif // DBHANDLER_H
+
+void DBhandler::loadMySqlDriver()
+{
+
+}

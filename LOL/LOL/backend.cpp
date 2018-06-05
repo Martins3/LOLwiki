@@ -15,12 +15,6 @@ QString BackEnd::userName()
 void BackEnd::setUserName(const QString &userName)
 {
     qDebug() << "changed to " << userName;
-
-//    QSqlQuery query("SELECT * FROM Summoner");
-//    while (query.next()) {
-//        QString country = query.value(1).toString();
-//        qDebug() << country;
-//    }
     m_userName = userName;
     emit userNameChanged();
 }

@@ -75,7 +75,7 @@ static const uint qt_meta_data_SummonerData[] = {
     QMetaType::Void,
 
  // properties: name, type, flags
-       6, QMetaType::QString, 0x00495103,
+       6, QMetaType::QString, 0x00495001,
        7, QMetaType::QString, 0x00495001,
        8, QMetaType::QString, 0x00495001,
        9, QMetaType::QString, 0x00495001,
@@ -145,13 +145,6 @@ void SummonerData::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
-        SummonerData *_t = static_cast<SummonerData *>(_o);
-        Q_UNUSED(_t)
-        void *_v = _a[0];
-        switch (_id) {
-        case 0: _t->setName(*reinterpret_cast< QString*>(_v)); break;
-        default: break;
-        }
     } else if (_c == QMetaObject::ResetProperty) {
     }
 #endif // QT_NO_PROPERTIES

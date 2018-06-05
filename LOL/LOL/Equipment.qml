@@ -168,10 +168,16 @@ Page{
                 height: parent.height
                 anchors.left:  parent.left
 
+
                 CheckBox {
                     checked: true
                     onClicked: {
-                       console.log("breakfast")
+                        console.log("breakfast")
+                        if(checked){
+                           summoner.handler("", edit_name.text)
+                        }else{
+                        }
+                        grid.model = summoner.listModel
                     }
                 }
                 Text {
@@ -180,17 +186,18 @@ Page{
 
 
                 CheckBox {
+                    signal login(string username, string password, string status)
                 }
                 Text {
                     text: qsTr("Mana")
                 }
 
                 CheckBox {
+                    signal login(string username, string password, string status)
                     checked: true
                 }
                 Text {
                     text: qsTr("Mana")
-
                 }
 
             }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Summoner_t {
-    QByteArrayData data[16];
-    char stringdata0[153];
+    QByteArrayData data[10];
+    char stringdata0[102];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,28 +32,20 @@ struct qt_meta_stringdata_Summoner_t {
 static const qt_meta_stringdata_Summoner_t qt_meta_stringdata_Summoner = {
     {
 QT_MOC_LITERAL(0, 0, 8), // "Summoner"
-QT_MOC_LITERAL(1, 9, 9), // "idChanged"
-QT_MOC_LITERAL(2, 19, 0), // ""
-QT_MOC_LITERAL(3, 20, 15), // "cooldownChanged"
-QT_MOC_LITERAL(4, 36, 18), // "descriptionChanged"
-QT_MOC_LITERAL(5, 55, 12), // "imageChanged"
-QT_MOC_LITERAL(6, 68, 16), // "listModelChanged"
-QT_MOC_LITERAL(7, 85, 7), // "handler"
-QT_MOC_LITERAL(8, 93, 2), // "id"
-QT_MOC_LITERAL(9, 96, 6), // "new_id"
-QT_MOC_LITERAL(10, 103, 7), // "flushDb"
-QT_MOC_LITERAL(11, 111, 9), // "listModel"
-QT_MOC_LITERAL(12, 121, 4), // "name"
-QT_MOC_LITERAL(13, 126, 8), // "cooldown"
-QT_MOC_LITERAL(14, 135, 11), // "description"
-QT_MOC_LITERAL(15, 147, 5) // "image"
+QT_MOC_LITERAL(1, 9, 16), // "listModelChanged"
+QT_MOC_LITERAL(2, 26, 0), // ""
+QT_MOC_LITERAL(3, 27, 20), // "itemListModelChanged"
+QT_MOC_LITERAL(4, 48, 7), // "handler"
+QT_MOC_LITERAL(5, 56, 2), // "id"
+QT_MOC_LITERAL(6, 59, 6), // "new_id"
+QT_MOC_LITERAL(7, 66, 11), // "itemHandler"
+QT_MOC_LITERAL(8, 78, 9), // "listModel"
+QT_MOC_LITERAL(9, 88, 13) // "itemListModel"
 
     },
-    "Summoner\0idChanged\0\0cooldownChanged\0"
-    "descriptionChanged\0imageChanged\0"
-    "listModelChanged\0handler\0id\0new_id\0"
-    "flushDb\0listModel\0name\0cooldown\0"
-    "description\0image"
+    "Summoner\0listModelChanged\0\0"
+    "itemListModelChanged\0handler\0id\0new_id\0"
+    "itemHandler\0listModel\0itemListModel"
 };
 #undef QT_MOC_LITERAL
 
@@ -63,48 +55,36 @@ static const uint qt_meta_data_Summoner[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
-       5,   62, // properties
+       4,   14, // methods
+       2,   46, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       5,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x06 /* Public */,
-       3,    0,   50,    2, 0x06 /* Public */,
-       4,    0,   51,    2, 0x06 /* Public */,
-       5,    0,   52,    2, 0x06 /* Public */,
-       6,    0,   53,    2, 0x06 /* Public */,
+       1,    0,   34,    2, 0x06 /* Public */,
+       3,    0,   35,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    2,   54,    2, 0x0a /* Public */,
-      10,    1,   59,    2, 0x0a /* Public */,
+       4,    2,   36,    2, 0x0a /* Public */,
+       7,    2,   41,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    8,    9,
-    QMetaType::Void, QMetaType::QVariant,   11,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    5,    6,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    5,    6,
 
  // properties: name, type, flags
-      12, QMetaType::QString, 0x00495003,
-      13, QMetaType::Int, 0x00495001,
-      14, QMetaType::QString, 0x00495001,
-      15, QMetaType::QString, 0x00495001,
-      11, QMetaType::QVariant, 0x00495001,
+       8, QMetaType::QVariant, 0x00495001,
+       9, QMetaType::QVariant, 0x00495001,
 
  // properties: notify_signal_id
        0,
        1,
-       2,
-       3,
-       4,
 
        0        // eod
 };
@@ -115,49 +95,25 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         Summoner *_t = static_cast<Summoner *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->idChanged(); break;
-        case 1: _t->cooldownChanged(); break;
-        case 2: _t->descriptionChanged(); break;
-        case 3: _t->imageChanged(); break;
-        case 4: _t->listModelChanged(); break;
-        case 5: _t->handler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 6: _t->flushDb((*reinterpret_cast< const QVariant(*)>(_a[1]))); break;
+        case 0: _t->listModelChanged(); break;
+        case 1: _t->itemListModelChanged(); break;
+        case 2: _t->handler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 3: _t->itemHandler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             typedef void (Summoner::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::idChanged)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::listModelChanged)) {
                 *result = 0;
                 return;
             }
         }
         {
             typedef void (Summoner::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::cooldownChanged)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::itemListModelChanged)) {
                 *result = 1;
-                return;
-            }
-        }
-        {
-            typedef void (Summoner::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::descriptionChanged)) {
-                *result = 2;
-                return;
-            }
-        }
-        {
-            typedef void (Summoner::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::imageChanged)) {
-                *result = 3;
-                return;
-            }
-        }
-        {
-            typedef void (Summoner::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::listModelChanged)) {
-                *result = 4;
                 return;
             }
         }
@@ -168,21 +124,11 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
-        case 0: *reinterpret_cast< QString*>(_v) = _t->getID(); break;
-        case 1: *reinterpret_cast< int*>(_v) = _t->getCooldown(); break;
-        case 2: *reinterpret_cast< QString*>(_v) = _t->getDescription(); break;
-        case 3: *reinterpret_cast< QString*>(_v) = _t->getImage(); break;
-        case 4: *reinterpret_cast< QVariant*>(_v) = _t->getListModel(); break;
+        case 0: *reinterpret_cast< QVariant*>(_v) = _t->getListModel(); break;
+        case 1: *reinterpret_cast< QVariant*>(_v) = _t->getItemListModel(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
-        Summoner *_t = static_cast<Summoner *>(_o);
-        Q_UNUSED(_t)
-        void *_v = _a[0];
-        switch (_id) {
-        case 0: _t->setID(*reinterpret_cast< QString*>(_v)); break;
-        default: break;
-        }
     } else if (_c == QMetaObject::ResetProperty) {
     }
 #endif // QT_NO_PROPERTIES
@@ -213,62 +159,44 @@ int Summoner::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 4;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 2;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
-        _id -= 5;
+        _id -= 2;
     } else if (_c == QMetaObject::QueryPropertyScriptable) {
-        _id -= 5;
+        _id -= 2;
     } else if (_c == QMetaObject::QueryPropertyStored) {
-        _id -= 5;
+        _id -= 2;
     } else if (_c == QMetaObject::QueryPropertyEditable) {
-        _id -= 5;
+        _id -= 2;
     } else if (_c == QMetaObject::QueryPropertyUser) {
-        _id -= 5;
+        _id -= 2;
     }
 #endif // QT_NO_PROPERTIES
     return _id;
 }
 
 // SIGNAL 0
-void Summoner::idChanged()
+void Summoner::listModelChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void Summoner::cooldownChanged()
+void Summoner::itemListModelChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
-}
-
-// SIGNAL 2
-void Summoner::descriptionChanged()
-{
-    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
-}
-
-// SIGNAL 3
-void Summoner::imageChanged()
-{
-    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
-}
-
-// SIGNAL 4
-void Summoner::listModelChanged()
-{
-    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
