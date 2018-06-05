@@ -1,10 +1,10 @@
 #include <QDebug>
 #include <QSqlQuery>
-#include <QJsonObject>
 #include <iostream>
 #include <string>
 #include "summoner.h"
 #include "summonerdata.h"
+#include "itemdata.h"
 
 QVariant Summoner::getListModel()
 {
@@ -29,11 +29,10 @@ QVariant Summoner::getItemListModel()
     query.exec();
     dataList.clear();
     while(query.next()) {
-        QString id = query.value(0).toString();
-        QString image = QString::fromStdString(std::string("spell/")) + query.value(3).toString();
-        QString des = query.value(2).toString();
-        int cooldown = query.value(1).toInt();
-        dataList.append(new SummonerData(id, image, des, cooldown));
+        QString id = query.value(2).toString();
+        QString image = QString::fromStdString(std::string("item/")) + query.value(1).toString();
+        QString des = query.value(3).toString();
+        dataList.append(new ItemData(id, image, des));
     }
     return QVariant::fromValue(dataList);
 }
@@ -54,4 +53,6 @@ void Summoner::handler(const QString &id, const QString &new_id)
 void Summoner::itemHandler(const QString &id, const QString &new_id)
 {
     // not implemented yet !
+    qDebug() << id;
+    qDebug() << new_id;
 }

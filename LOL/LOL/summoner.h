@@ -23,8 +23,6 @@ public slots:
     void itemHandler(const QString & id, const QString & new_id);
 private:
     QList<QObject*> dataList;
-    QVariant m_listModel;
-    QVariant m_ItemListModel;
 };
 
 #endif // SUMMONER_H

@@ -227,7 +227,7 @@ Page{
                 highlightFollowsCurrentItem: true
                 highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
 
-                model: summoner.listModel
+                model: summoner.itemListModel
                 delegate:
                     Component {
                         id: contactDelegate
@@ -278,7 +278,5 @@ Page{
             }
         }
     }
-
-
 }
 

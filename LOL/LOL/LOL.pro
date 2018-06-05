@@ -16,9 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     summoner.cpp \
     summonerdata.cpp \
-    main.cpp \
-    summoner.cpp \
-    summonerdata.cpp \
     itemdata.cpp
 
 RESOURCES += qml.qrc
@@ -35,8 +32,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    summonerdata.h \
-    summoner.h \
     summoner.h \
     summonerdata.h \
     itemdata.h

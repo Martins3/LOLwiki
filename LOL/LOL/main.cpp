@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    qmlRegisterType<BackEnd>("example.backend", 1, 0, "BackEnd");
     qmlRegisterType<Summoner>("show.summoner", 1, 0, "Summoner");
 
     db();

@@ -24,7 +24,6 @@ public:
     QString getDescription();
     QString getCooldown();
 
-
 signals:
     void nameChanged();
     void imageChanged();
