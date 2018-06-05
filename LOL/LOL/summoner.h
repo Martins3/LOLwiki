@@ -29,13 +29,13 @@ class Summoner : public QObject
 
 public:
     Summoner();
-    void setID(const QString &userName);
     QString getID();
     int getCooldown();
     QString getDescription();
     QString getImage();
     QVariant getListModel();
 
+    void setID(const QString &userName);
 signals:
     void idChanged();
     void cooldownChanged();
@@ -44,14 +44,14 @@ signals:
     void listModelChanged();
 public slots:
     void handler(const QString & id, const QString & new_id);
+    void flushDb(const QVariant & listModel);
 private:
     QString m_id;
     int m_cooldown;
     QString m_description;
     QString m_image;
     QList<QObject*> dataList;
-//    dataList.append(new DataObject("Item 1", "red"));
-//    ctxt->setContextProperty("myModel", QVariant::fromValue(dataList));
+    QVariant m_listModel;
 };
 
 #endif // SUMMONER_H
