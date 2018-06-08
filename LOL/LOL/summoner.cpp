@@ -5,6 +5,8 @@
 #include "summoner.h"
 #include "summonerdata.h"
 #include "itemdata.h"
+#include "baserune.h"
+#include "rune.h"
 
 QVariant Summoner::getListModel()
 {
@@ -37,6 +39,21 @@ QVariant Summoner::getItemListModel()
     return QVariant::fromValue(dataList);
 }
 
+QVariant Summoner::getBaseRuneListModel()
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM BaseRune");
+    query.exec();
+    dataList.clear();
+    while(query.next()) {
+        int id = query.value(0).toInt();
+        QString name = query.value(2).toString();
+        QString image = query.value(3).toString();
+        dataList.append(new BaseRune(id, name, image));
+    }
+    return QVariant::fromValue(dataList);
+}
+
 void Summoner::handler(const QString &id, const QString &new_id)
 {
     qDebug() << "call the handler to access the database";
@@ -50,9 +67,25 @@ void Summoner::handler(const QString &id, const QString &new_id)
     query.exec();
 }
 
+
+
 void Summoner::itemHandler(const QString &id, const QString &new_id)
 {
-    // not implemented yet !
     qDebug() << id;
     qDebug() << new_id;
+}
+
+QVariant Summoner::getRune(const int parent_id)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Rune where parent_id = :id");
+    query.bindValue(":id", parent_id);
+    query.exec();
+    dataList.clear();
+    while(query.next()) {
+        QString name = query.value(3).toString();
+        QString image = query.value(4).toString();
+        dataList.append(new Rune(name, image));
+    }
+    return QVariant::fromValue(dataList);
 }

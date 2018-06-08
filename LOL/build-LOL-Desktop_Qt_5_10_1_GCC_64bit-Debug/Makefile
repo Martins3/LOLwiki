@@ -53,18 +53,26 @@ OBJECTS_DIR   = ./
 SOURCES       = ../LOL/main.cpp \
 		../LOL/summoner.cpp \
 		../LOL/summonerdata.cpp \
-		../LOL/itemdata.cpp qrc_qml.cpp \
+		../LOL/itemdata.cpp \
+		../LOL/rune.cpp \
+		../LOL/baserune.cpp qrc_qml.cpp \
 		moc_summoner.cpp \
 		moc_summonerdata.cpp \
-		moc_itemdata.cpp
+		moc_itemdata.cpp \
+		moc_rune.cpp \
+		moc_baserune.cpp
 OBJECTS       = main.o \
 		summoner.o \
 		summonerdata.o \
 		itemdata.o \
+		rune.o \
+		baserune.o \
 		qrc_qml.o \
 		moc_summoner.o \
 		moc_summonerdata.o \
-		moc_itemdata.o
+		moc_itemdata.o \
+		moc_rune.o \
+		moc_baserune.o
 DIST          = ../LOL/item/1001.png \
 		../LOL/item/1004.png \
 		../LOL/item/1006.png \
@@ -534,10 +542,14 @@ DIST          = ../LOL/item/1001.png \
 		../../../../software/Qt/5.10.1/gcc_64/mkspecs/features/lex.prf \
 		../LOL/LOL.pro ../LOL/summoner.h \
 		../LOL/summonerdata.h \
-		../LOL/itemdata.h ../LOL/main.cpp \
+		../LOL/itemdata.h \
+		../LOL/rune.h \
+		../LOL/baserune.h ../LOL/main.cpp \
 		../LOL/summoner.cpp \
 		../LOL/summonerdata.cpp \
-		../LOL/itemdata.cpp
+		../LOL/itemdata.cpp \
+		../LOL/rune.cpp \
+		../LOL/baserune.cpp
 QMAKE_TARGET  = LOL
 DESTDIR       = 
 TARGET        = LOL
@@ -946,8 +958,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../LOL/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../software/Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../LOL/summoner.h ../LOL/summonerdata.h ../LOL/itemdata.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../LOL/main.cpp ../LOL/summoner.cpp ../LOL/summonerdata.cpp ../LOL/itemdata.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../LOL/summoner.h ../LOL/summonerdata.h ../LOL/itemdata.h ../LOL/rune.h ../LOL/baserune.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../LOL/main.cpp ../LOL/summoner.cpp ../LOL/summonerdata.cpp ../LOL/itemdata.cpp ../LOL/rune.cpp ../LOL/baserune.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1580,6 +1592,80 @@ qrc_qml.cpp: ../LOL/qml.qrc \
 		../LOL/champion/Ashe.png \
 		../LOL/champion/Ahri_7.jpg \
 		../LOL/champion/Aatrox_0.jpg \
+		../LOL/perk-images/Template/7000.png \
+		../LOL/perk-images/Styles/7203_Whimsy.png \
+		../LOL/perk-images/Styles/7202_Sorcery.png \
+		../LOL/perk-images/Styles/7201_Precision.png \
+		../LOL/perk-images/Styles/7204_Resolve.png \
+		../LOL/perk-images/Styles/RunesIcon.png \
+		../LOL/perk-images/Styles/7200_Domination.png \
+		../LOL/perk-images/Styles/Precision/DangerousGame.png \
+		../LOL/perk-images/Styles/Precision/Legend_Infamy.png \
+		../LOL/perk-images/Styles/Precision/Legend_Tenacity.png \
+		../LOL/perk-images/Styles/Precision/Overheal.png \
+		../LOL/perk-images/Styles/Precision/Legend_Heroism.png \
+		../LOL/perk-images/Styles/Precision/FleetFootwork/FleetFootwork.png \
+		../LOL/perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png \
+		../LOL/perk-images/Styles/Precision/CutDown/CutDown.png \
+		../LOL/perk-images/Styles/Precision/FlowofBattle/FlowofBattleTemp.png \
+		../LOL/perk-images/Styles/Precision/Conqueror/Conqueror.png \
+		../LOL/perk-images/Styles/Precision/PressTheAttack/PressTheAttack.png \
+		../LOL/perk-images/Styles/Precision/LastResort/LastResortIcon.png \
+		../LOL/perk-images/Styles/Domination/IngeniousHunter/IngeniousHunter.png \
+		../LOL/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png \
+		../LOL/perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png \
+		../LOL/perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png \
+		../LOL/perk-images/Styles/Domination/Electrocute/Electrocute.png \
+		../LOL/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png \
+		../LOL/perk-images/Styles/Domination/Predator/Predator.png \
+		../LOL/perk-images/Styles/Domination/GhostPoro/GhostPoro.png \
+		../LOL/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png \
+		../LOL/perk-images/Styles/Domination/CheapShot/CheapShot.png \
+		../LOL/perk-images/Styles/Domination/ZombieWard/ZombieWard.png \
+		../LOL/perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png \
+		../LOL/perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png \
+		../LOL/perk-images/Styles/Domination/RavenousHunter/RavenousHunter.png \
+		../LOL/perk-images/Styles/Resolve/Demolish/Demolish.png \
+		../LOL/perk-images/Styles/Resolve/Guardian/Guardian.png \
+		../LOL/perk-images/Styles/Resolve/BonePlating/BonePlating.png \
+		../LOL/perk-images/Styles/Resolve/Chrysalis/Chrysalis.png \
+		../LOL/perk-images/Styles/Resolve/IronSkin/IronSkin.png \
+		../LOL/perk-images/Styles/Resolve/SecondWind/SecondWind.png \
+		../LOL/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png \
+		../LOL/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png \
+		../LOL/perk-images/Styles/Resolve/Revitalize/Revitalize.png \
+		../LOL/perk-images/Styles/Resolve/MirrorShell/MirrorShell.png \
+		../LOL/perk-images/Styles/Resolve/Conditioning/Conditioning.png \
+		../LOL/perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png \
+		../LOL/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png \
+		../LOL/perk-images/Styles/Resolve/FontOfLife/FontOfLife.png \
+		../LOL/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png \
+		../LOL/perk-images/Styles/Inspiration/FuturesMarket/FuturesMarket.png \
+		../LOL/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png \
+		../LOL/perk-images/Styles/Inspiration/Kleptomancy/Kleptomancy.png \
+		../LOL/perk-images/Styles/Inspiration/CelestialBody/CelestialBody.png \
+		../LOL/perk-images/Styles/Inspiration/PerfectTiming/PerfectTiming.png \
+		../LOL/perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png \
+		../LOL/perk-images/Styles/Inspiration/MinionDematerializer/MinionDematerializer.png \
+		../LOL/perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png \
+		../LOL/perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png \
+		../LOL/perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png \
+		../LOL/perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png \
+		../LOL/perk-images/Styles/Sorcery/Celerity/CelerityTemp.png \
+		../LOL/perk-images/Styles/Sorcery/NimbusCloak/6361.png \
+		../LOL/perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png \
+		../LOL/perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png \
+		../LOL/perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png \
+		../LOL/perk-images/Styles/Sorcery/PhaseRush/PhaseRush.png \
+		../LOL/perk-images/Styles/Sorcery/NullifyingOrb/Pokeshield.png \
+		../LOL/perk-images/Styles/Sorcery/Unflinching/Unflinching.png \
+		../LOL/perk-images/Styles/Sorcery/Transcendence/Transcendence.png \
+		../LOL/perk-images/Styles/Sorcery/SummonAery/SummonAery.png \
+		../LOL/perk-images/Styles/Sorcery/LastStand/LastStand.png \
+		../LOL/perk-images/Styles/Sorcery/TheUltimateHat/TheUltimateHat.png \
+		../LOL/perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png \
+		../LOL/perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png \
+		../LOL/perk-images/Styles/Sorcery/Scorch/Scorch.png \
 		../LOL/item/1037.png \
 		../LOL/item/2061.png \
 		../LOL/item/3455.png \
@@ -2466,9 +2552,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../software/Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../../software/Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_summoner.cpp moc_summonerdata.cpp moc_itemdata.cpp
+compiler_moc_header_make_all: moc_summoner.cpp moc_summonerdata.cpp moc_itemdata.cpp moc_rune.cpp moc_baserune.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_summoner.cpp moc_summonerdata.cpp moc_itemdata.cpp
+	-$(DEL_FILE) moc_summoner.cpp moc_summonerdata.cpp moc_itemdata.cpp moc_rune.cpp moc_baserune.cpp
 moc_summoner.cpp: ../../../../software/Qt/5.10.1/gcc_64/include/QtCore/QObject \
 		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject.h \
 		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
@@ -2649,6 +2735,116 @@ moc_itemdata.cpp: ../../../../software/Qt/5.10.1/gcc_64/include/QtCore/QObject \
 		moc_predefs.h \
 		../../../../software/Qt/5.10.1/gcc_64/bin/moc
 	/home/martin/software/Qt/5.10.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/martin/software/Qt/5.10.1/gcc_64/mkspecs/linux-g++ -I/home/martin/X-Brain/DbLab/LOL/LOL -I/home/martin/software/Qt/5.10.1/gcc_64/include -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtQuick -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtGui -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtQml -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtNetwork -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtSql -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../LOL/itemdata.h -o moc_itemdata.cpp
+
+moc_rune.cpp: ../../../../software/Qt/5.10.1/gcc_64/include/QtCore/QObject \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qflags.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstring.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qchar.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qpair.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject_impl.h \
+		../LOL/rune.h \
+		moc_predefs.h \
+		../../../../software/Qt/5.10.1/gcc_64/bin/moc
+	/home/martin/software/Qt/5.10.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/martin/software/Qt/5.10.1/gcc_64/mkspecs/linux-g++ -I/home/martin/X-Brain/DbLab/LOL/LOL -I/home/martin/software/Qt/5.10.1/gcc_64/include -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtQuick -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtGui -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtQml -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtNetwork -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtSql -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../LOL/rune.h -o moc_rune.cpp
+
+moc_baserune.cpp: ../../../../software/Qt/5.10.1/gcc_64/include/QtCore/QObject \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qflags.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstring.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qchar.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qpair.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject_impl.h \
+		../LOL/baserune.h \
+		moc_predefs.h \
+		../../../../software/Qt/5.10.1/gcc_64/bin/moc
+	/home/martin/software/Qt/5.10.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/martin/software/Qt/5.10.1/gcc_64/mkspecs/linux-g++ -I/home/martin/X-Brain/DbLab/LOL/LOL -I/home/martin/software/Qt/5.10.1/gcc_64/include -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtQuick -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtGui -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtQml -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtNetwork -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtSql -I/home/martin/software/Qt/5.10.1/gcc_64/include/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../LOL/baserune.h -o moc_baserune.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -2964,6 +3160,112 @@ itemdata.o: ../LOL/itemdata.cpp ../LOL/itemdata.h \
 		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o itemdata.o ../LOL/itemdata.cpp
 
+rune.o: ../LOL/rune.cpp ../LOL/rune.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/QObject \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qflags.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstring.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qchar.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qpair.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rune.o ../LOL/rune.cpp
+
+baserune.o: ../LOL/baserune.cpp ../LOL/baserune.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/QObject \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qflags.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstring.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qchar.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qpair.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../software/Qt/5.10.1/gcc_64/include/QtCore/qobject_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o baserune.o ../LOL/baserune.cpp
+
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
 
@@ -2975,6 +3277,12 @@ moc_summonerdata.o: moc_summonerdata.cpp
 
 moc_itemdata.o: moc_itemdata.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_itemdata.o moc_itemdata.cpp
+
+moc_rune.o: moc_rune.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rune.o moc_rune.cpp
+
+moc_baserune.o: moc_baserune.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_baserune.o moc_baserune.cpp
 
 ####### Install
 

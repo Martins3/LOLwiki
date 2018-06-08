@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Summoner_t {
-    QByteArrayData data[10];
-    char stringdata0[102];
+    QByteArrayData data[14];
+    char stringdata0[163];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,17 +35,23 @@ QT_MOC_LITERAL(0, 0, 8), // "Summoner"
 QT_MOC_LITERAL(1, 9, 16), // "listModelChanged"
 QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 20), // "itemListModelChanged"
-QT_MOC_LITERAL(4, 48, 7), // "handler"
-QT_MOC_LITERAL(5, 56, 2), // "id"
-QT_MOC_LITERAL(6, 59, 6), // "new_id"
-QT_MOC_LITERAL(7, 66, 11), // "itemHandler"
-QT_MOC_LITERAL(8, 78, 9), // "listModel"
-QT_MOC_LITERAL(9, 88, 13) // "itemListModel"
+QT_MOC_LITERAL(4, 48, 24), // "baseRuneListModelChanged"
+QT_MOC_LITERAL(5, 73, 7), // "handler"
+QT_MOC_LITERAL(6, 81, 2), // "id"
+QT_MOC_LITERAL(7, 84, 6), // "new_id"
+QT_MOC_LITERAL(8, 91, 11), // "itemHandler"
+QT_MOC_LITERAL(9, 103, 7), // "getRune"
+QT_MOC_LITERAL(10, 111, 9), // "parent_id"
+QT_MOC_LITERAL(11, 121, 9), // "listModel"
+QT_MOC_LITERAL(12, 131, 13), // "itemListModel"
+QT_MOC_LITERAL(13, 145, 17) // "baseRuneListModel"
 
     },
     "Summoner\0listModelChanged\0\0"
-    "itemListModelChanged\0handler\0id\0new_id\0"
-    "itemHandler\0listModel\0itemListModel"
+    "itemListModelChanged\0baseRuneListModelChanged\0"
+    "handler\0id\0new_id\0itemHandler\0getRune\0"
+    "parent_id\0listModel\0itemListModel\0"
+    "baseRuneListModel"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,36 +61,42 @@ static const uint qt_meta_data_Summoner[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
-       2,   46, // properties
+       6,   14, // methods
+       3,   60, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
-       3,    0,   35,    2, 0x06 /* Public */,
+       1,    0,   44,    2, 0x06 /* Public */,
+       3,    0,   45,    2, 0x06 /* Public */,
+       4,    0,   46,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    2,   36,    2, 0x0a /* Public */,
-       7,    2,   41,    2, 0x0a /* Public */,
+       5,    2,   47,    2, 0x0a /* Public */,
+       8,    2,   52,    2, 0x0a /* Public */,
+       9,    1,   57,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    5,    6,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    5,    6,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    6,    7,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    6,    7,
+    QMetaType::QVariant, QMetaType::Int,   10,
 
  // properties: name, type, flags
-       8, QMetaType::QVariant, 0x00495001,
-       9, QMetaType::QVariant, 0x00495001,
+      11, QMetaType::QVariant, 0x00495001,
+      12, QMetaType::QVariant, 0x00495001,
+      13, QMetaType::QVariant, 0x00495001,
 
  // properties: notify_signal_id
        0,
        1,
+       2,
 
        0        // eod
 };
@@ -97,8 +109,11 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         switch (_id) {
         case 0: _t->listModelChanged(); break;
         case 1: _t->itemListModelChanged(); break;
-        case 2: _t->handler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 3: _t->itemHandler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 2: _t->baseRuneListModelChanged(); break;
+        case 3: _t->handler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 4: _t->itemHandler((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 5: { QVariant _r = _t->getRune((*reinterpret_cast< const int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QVariant*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -117,6 +132,13 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
                 return;
             }
         }
+        {
+            typedef void (Summoner::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Summoner::baseRuneListModelChanged)) {
+                *result = 2;
+                return;
+            }
+        }
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty) {
@@ -126,6 +148,7 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         switch (_id) {
         case 0: *reinterpret_cast< QVariant*>(_v) = _t->getListModel(); break;
         case 1: *reinterpret_cast< QVariant*>(_v) = _t->getItemListModel(); break;
+        case 2: *reinterpret_cast< QVariant*>(_v) = _t->getBaseRuneListModel(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
@@ -159,29 +182,29 @@ int Summoner::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 6;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::QueryPropertyScriptable) {
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::QueryPropertyStored) {
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::QueryPropertyEditable) {
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::QueryPropertyUser) {
-        _id -= 2;
+        _id -= 3;
     }
 #endif // QT_NO_PROPERTIES
     return _id;
@@ -197,6 +220,12 @@ void Summoner::listModelChanged()
 void Summoner::itemListModelChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void Summoner::baseRuneListModelChanged()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
