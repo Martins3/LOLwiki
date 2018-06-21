@@ -18,7 +18,10 @@ SOURCES += main.cpp \
     itemdata.cpp \
     rune.cpp \
     baserune.cpp \
-    summonerSpell.cpp
+    summonerSpell.cpp \
+    objectWraper.cpp \
+    champion.cpp \
+    championtag.cpp
 
 RESOURCES += qml.qrc
 
@@ -38,7 +41,10 @@ HEADERS += \
     itemdata.h \
     rune.h \
     baserune.h \
-    summonerSpell.h
+    summonerSpell.h \
+    objectWraper.h \
+    champion.h \
+    championtag.h
 
 DISTFILES += \
     item/1001.png \

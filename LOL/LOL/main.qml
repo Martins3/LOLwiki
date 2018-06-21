@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 ApplicationWindow {
     id: window
     visible: true
-    width: 607
+    width: 550
     height: 358
     title: qsTr("最后的轻语")
 

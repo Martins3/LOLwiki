@@ -23,12 +23,22 @@ Page{
         opacity: 0.8
         anchors.fill: parent
         Window {
+            Image{
+                opacity: 0.4
+                anchors.fill: parent
+                smooth: true
+                sourceSize.width: 1215
+                sourceSize.height: 717
+                source: "champion/Aatrox_0.jpg"
+             }
+
             id: showWindow
             title: "Summoner Spell"
             maximumWidth: 308
             maximumHeight: 560
             minimumWidth: 308
             minimumHeight:  560
+
             Column{
                 anchors.fill: parent
                 Text {
@@ -37,15 +47,10 @@ Page{
 
             Text {
                 width: parent.width
-                id: show_description
+                id: show_plaintext
                 wrapMode: Text.WrapAnywhere
-                height: parent / 4
+                height: parent / 5
                 font.pixelSize: 23
-            }
-
-
-            Text {
-                id: show_cooldown
             }
 
             Image {
@@ -81,12 +86,12 @@ Page{
                 }
 
                 Label{
-                    text: "Description"
+                    text: "Plain text"
                 }
                 TextEdit {
                     width: parent.width
-                    height: parent.height / 4
-                    id: edit_description
+                    height: parent.height / 5
+                    id: edit_plaintext
                     color: "black"
                     wrapMode: Text.WrapAnywhere
                     font.pixelSize: 15
@@ -122,95 +127,165 @@ Page{
                     Component.onCompleted: visible = false
                 }
 
-                Label{
-                    text: "Cooldown"
-                }
-                TextEdit {
-                    id: edit_cooldown
-                }
-
                 Row{
                     Button{
                         text: "Ok"
-                        id: edit_ok
+                        onClicked:{
+                            summoner.itemHandler(editWindow.title, edit_image.source, edit_name.text,
+                                                 edit_plaintext.text, false)
+                            grid.model = summoner.itemListModel
+                            editWindow.close()
+                        }
+                    }
+
+                    Button{
+                        text: "Delete"
+                        onClicked: {
+                            summoner.itemHandler(editWindow.title, edit_image.source, edit_name.text,
+                                                 edit_plaintext.text, true)
+                            grid.model = summoner.itemListModel
+                            editWindow.close()
+                        }
                     }
 
                     Button{
                         text: "Cancel"
-                        id: edit_cancel
+                        onClicked: {
+                            editWindow.close()
+                            editWindow.close()
+                        }
                     }
                 }
-
-        }
-
-        Connections{
-            target: editWindow
-            onClosing:{
-               summoner.handler(editWindow.title, edit_name.text)
-               grid.model = summoner.listModel
-            }
         }
     }
 
         Window {
         id: addWindow
-        title: "Create Summoner Spell"
-        width: 400
-        height: 400
+
+        maximumWidth: 308
+        maximumHeight: 560
+        minimumWidth: 308
+        minimumHeight:  560
+
+        Image{
+            opacity: 0.4
+            anchors.fill: parent
+            smooth: true
+            sourceSize.width: 1215
+            sourceSize.height: 717
+            source: "champion/Aatrox_0.jpg"
+         }
+
+        Column{
+                anchors.fill: parent
+                Label{
+                    text: "Name"
+                }
+                TextEdit {
+                    id: add_name
+                    text: "item name"
+                }
+                Label{
+                    text: "Plain text"
+                }
+                TextEdit {
+                    width: parent.width
+                    height: parent.height / 5
+                    id: add_plaintext
+                    color: "black"
+                    wrapMode: Text.WrapAnywhere
+                    font.pixelSize: 15
+                    text : "desc"
+                }
+
+                Label{
+                    text: "Image"
+                }
+
+                Image {
+                    id: add_image
+                     MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            fileDialog.open()
+                        }
+                    }
+                }
+
+                FileDialog {
+                    id: addFileDialog
+                    title: "Please choose a file"
+                    folder: shortcuts.home
+                    nameFilters: [ "Image files (*.jpg *.png)"]
+                    onAccepted: {
+                        console.log("chose " + fileDialog.fileUrls)
+                        console.log("Send the message to backend !")
+                    }
+                    onRejected: {
+                        Qt.quit()
+                        console.log("Canceled")
+                    }
+                    Component.onCompleted: visible = false
+                }
+
+                Row{
+                    Button{
+                        text: "Ok"
+                        onClicked:{
+                            summoner.itemHandler(addWindow.title, add_image.source, add_name.text,
+                                                 add_plaintext.text, false)
+                            grid.model = summoner.itemListModel
+                            addWindow.close()
+                        }
+                    }
+                    Button{
+                        text: "Cancel"
+                        onClicked: {
+                            addWindow.close()
+                        }
+                    }
+                }
+        }
     }
 
         Rectangle {
             width: parent.width
             height: parent.height
 
-            Column{
-                width: parent.width * 0.1
+            GridView{
                 height: parent.height
+                width: parent.width * 0.15
                 anchors.left:  parent.left
+                cellHeight: 25
+                cellWidth: parent.width * 0.15
+                clip: true
 
-
-                CheckBox {
-                    checked: true
-                    onClicked: {
-                        console.log("breakfast")
-                        if(checked){
-                           summoner.handler("", edit_name.text)
-                        }else{
+                model: summoner.itemTagModel
+                delegate:
+                    Component {
+                        CheckBox {
+                            clip: true
+                            text : model.modelData.name
+                            checked: false
+                            onClicked: {
+                                if(checked){
+                                    summoner.itemSelect(model.modelData.name, true);
+                                }else{
+                                    summoner.itemSelect(model.modelData.name, false);
+                                }
+                                grid.model = summoner.itemListModel
+                            }
                         }
-                        grid.model = summoner.listModel
                     }
-                }
-                Text {
-                    text: qsTr("Mana")
-                }
-
-
-                CheckBox {
-                    signal login(string username, string password, string status)
-                }
-                Text {
-                    text: qsTr("Mana")
-                }
-
-                CheckBox {
-                    signal login(string username, string password, string status)
-                    checked: true
-                }
-                Text {
-                    text: qsTr("Mana")
-                }
-
             }
 
             MouseArea {
                 id: idMouseArea
-
                 acceptedButtons: Qt.RightButton
-
                 anchors.fill: parent
-
                 onClicked: {
                     if (mouse.button & Qt.RightButton) {
+                        addWindow.title = -1
                         addWindow.show()
                     }
                 }
@@ -218,7 +293,7 @@ Page{
 
             GridView {
                 id: grid
-                width: parent.width * 0.9
+                width: parent.width * 0.85
                 height: parent.height
                 anchors.right: parent.right
                 focus: true
@@ -246,16 +321,14 @@ Page{
                                             if (mouse.button & Qt.RightButton) {
                                                 edit_name.text = model.modelData.name
                                                 edit_image.source = model.modelData.image
-                                                edit_description.text = model.modelData.description
-                                                edit_cooldown.text = model.modelData.cooldown
-                                                editWindow.title = model.modelData.name
+                                                edit_plaintext.text = model.modelData.description
+                                                editWindow.title = model.modelData.key
                                                 editWindow.show()
-                                                console.log(grid.currentIndex)
                                             } else if (mouse.button & Qt.LeftButton) {
                                                 show_name.text = model.modelData.name
                                                 show_image.source = model.modelData.image
-                                                show_description.text = model.modelData.description
-                                                show_cooldown.text = model.modelData.cooldown
+                                                show_plaintext.text = model.modelData.description
+                                                showWindow.title = model.modelData.key
                                                 showWindow.show()
                                             }
                                         }

@@ -1,29 +1,34 @@
-#include "summonerdata.h"
+#include "summonerSpell.h"
 #include <QDebug>
 
 
-SummonerData::SummonerData(QString name, QString image, QString description, int cooldown):
-    name(name), image(image), description(description), cooldown(cooldown)
+SummonerSpell::SummonerSpell(int spellKey, QString name, QString image, QString description, int cooldown):
+    spellKey(spellKey), name(name), image(image), description(description), cooldown(cooldown)
 {
 
 }
 
-QString SummonerData::getName()
+int SummonerSpell::getSpellKey()
+{
+    return spellKey;
+}
+
+QString SummonerSpell::getName()
 {
     return name;
 }
 
-QString SummonerData::getImage()
+QString SummonerSpell::getImage()
 {
     return image;
 }
 
-QString SummonerData::getDescription()
+QString SummonerSpell::getDescription()
 {
     return description;
 }
 
-QString SummonerData::getCooldown()
+int SummonerSpell::getCooldown()
 {
-    return QString::number(cooldown);
+    return cooldown;
 }

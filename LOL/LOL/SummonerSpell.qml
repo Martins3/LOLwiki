@@ -23,6 +23,16 @@ Page {
         maximumHeight: 560
         minimumWidth: 308
         minimumHeight:  560
+
+        Image{
+            opacity: 0.4
+            anchors.fill: parent
+            smooth: true
+            sourceSize.width: 1215
+            sourceSize.height: 717
+            source: "champion/Aatrox_0.jpg"
+        }
+
         Column{
             anchors.fill: parent
             Text {
@@ -127,30 +137,143 @@ Page {
                     Button{
                         text: "Ok"
                         id: edit_ok
+                        onClicked: {
+                            summoner.summonerSpellhandler(editWindow.title, edit_name.text,
+                                                         edit_cooldown.text, edit_description.text,
+                                                          edit_image.source, false)
+                            grid.model = summoner.listModel
+                            editWindow.close()
+                        }
+                    }
+
+
+                    Button{
+                        text: "delete"
+                        id: edit_delete
+                        onClicked: {
+                            summoner.summonerSpellhandler(editWindow.title, edit_name.text,
+                                                         edit_cooldown.text, edit_description.text,
+                                                          edit_image.source, true)
+                            grid.model = summoner.listModel
+                            editWindow.close()
+                        }
                     }
 
                     Button{
                         text: "Cancel"
                         id: edit_cancel
+                        onClicked: editWindow.close()
                     }
                 }
 
-        }
-
-        Connections{
-            target: editWindow
-            onClosing:{
-               summoner.handler(editWindow.title, edit_name.text)
-               grid.model = summoner.listModel
-            }
         }
     }
 
     Window {
         id: addWindow
         title: "Create Summoner Spell"
-        width: 400
-        height: 400
+
+        maximumWidth: 308
+        maximumHeight: 560
+        minimumWidth: 308
+        minimumHeight:  560
+
+        Image{
+            opacity: 0.4
+            anchors.fill: parent
+            smooth: true
+            sourceSize.width: 1215
+            sourceSize.height: 717
+            source: "champion/Aatrox_0.jpg"
+         }
+
+        Column{
+                anchors.fill: parent
+                Label{
+                    text: "Name"
+                }
+                TextEdit {
+                    id: add_name
+                    text: "summoner spell name"
+                }
+
+                Label{
+                    text: "Description"
+                }
+
+                TextEdit {
+                    width: parent.width
+                    height: parent.height / 4
+                    id: add_description
+                    color: "black"
+                    wrapMode: Text.WrapAnywhere
+                    font.pixelSize: 15
+                    text: "des"
+                }
+
+                Label{
+                    text: "Image"
+                }
+
+                Image {
+                    id: add_image
+                     MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            addFileDialog.open()
+                        }
+                    }
+                }
+
+                FileDialog {
+                    id: addFileDialog
+                    title: "Please choose a file"
+                    folder: shortcuts.home
+                    nameFilters: [ "Image files (*.jpg *.png)"]
+                    onAccepted: {
+                        console.log("chose " + fileDialog.fileUrls)
+                        console.log("Send the message to backend !")
+                    }
+                    onRejected: {
+                        Qt.quit()
+                        console.log("Canceled")
+                    }
+                    Component.onCompleted: visible = false
+                }
+
+                Label{
+                    text: "Cooldown"
+                }
+                TextEdit {
+                    id: add_cooldown
+                    text: "10"
+                }
+
+                Row{
+                    Button{
+                        text: "Ok"
+                        id: add_ok
+                        onClicked: {
+                            console.log(addWindow.title, add_name.text,
+                                                          add_cooldown.text, add_description.text,
+                                                          add_image.source)
+
+                            summoner.summonerSpellhandler(addWindow.title, add_name.text,
+                                                          add_cooldown.text, add_description.text,
+                                                          add_image.source, false)
+                            grid.model = summoner.listModel
+                            addWindow.close()
+                        }
+                    }
+
+                    Button{
+                        text: "Cancel"
+                        id: add_cancel
+                        onClicked: addWindow.close()
+                    }
+                }
+
+        }
     }
 
     Rectangle {
@@ -168,6 +291,7 @@ Page {
 
             onClicked: {
                 if (mouse.button & Qt.RightButton) {
+                    addWindow.title = -1;
                     addWindow.show()
                 }
             }
@@ -198,12 +322,14 @@ Page {
                                     onClicked:  {
                                         grid.currentIndex = index
                                         console.log(index)
+
                                         if (mouse.button & Qt.RightButton) {
                                             edit_name.text = model.modelData.name
                                             edit_image.source = model.modelData.image
                                             edit_description.text = model.modelData.description
                                             edit_cooldown.text = model.modelData.cooldown
-                                            editWindow.title = model.modelData.name
+                                            editWindow.title = model.modelData.spellKey
+
                                             editWindow.show()
                                             console.log(grid.currentIndex)
                                         } else if (mouse.button & Qt.LeftButton) {

@@ -4,10 +4,6 @@ import QtQuick.Controls 2.2
 ApplicationWindow {
     id: window
     visible: true
-    width: 607
-    height: 358
-    maximumHeight : 717
-    maximumWidth : 1215
     title: qsTr("LOLWiki")
     property bool online: false
     Login{
