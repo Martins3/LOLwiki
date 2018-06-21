@@ -12,7 +12,6 @@ Page{
     title: qsTr("Rune")
     Summoner{id: summoner}
 
-
     Image{
         opacity: 1
         anchors.fill: parent
@@ -147,7 +146,7 @@ Page{
             target: editWindow
             onClosing:{
                summoner.handler(editWindow.title, edit_name.text)
-               grid.model = summoner.listModel
+//               grid.model = summoner.listModel
             }
         }
     }
@@ -279,17 +278,4 @@ Page{
             }
         }
     }
-
-//    ListModel{
-//        id: listModel
-//    }
-
-//    Component.onCompleted: {
-//        for(var i = 0; i < 5; i ++){
-//            listModel.append({
-//                                 id: "name" + i,
-//                                 iconSource : "/perk-images/Styles/7200_Domination.png"
-//                             })
-//        }
-//    }
 }

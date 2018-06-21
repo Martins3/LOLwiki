@@ -15,10 +15,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     summoner.cpp \
-    summonerdata.cpp \
     itemdata.cpp \
     rune.cpp \
-    baserune.cpp
+    baserune.cpp \
+    summonerSpell.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,10 +35,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     summoner.h \
-    summonerdata.h \
     itemdata.h \
     rune.h \
-    baserune.h
+    baserune.h \
+    summonerSpell.h
 
 DISTFILES += \
     item/1001.png \
