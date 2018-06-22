@@ -18,6 +18,8 @@ class Summoner : public QObject
 
     Q_PROPERTY(QVariant matchListModel READ getMatchListModel NOTIFY onMatchListModelChanged);
 
+    Q_PROPERTY(QVariant matchData READ getMatchData NOTIFY onMatchDataChanged);
+
 
 public:
     Summoner();
@@ -28,9 +30,11 @@ public:
     QVariant getChampionListModel();
     QVariant getChampionTagListModel();
     QVariantList getMatchListModel();
+    QVariant getMatchData();
 
 
 signals:
+    void onMatchDataChanged();
     void itemTagModelChanged();
     void listModelChanged();
     void itemListModelChanged();

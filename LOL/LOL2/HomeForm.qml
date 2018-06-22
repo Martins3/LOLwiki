@@ -119,7 +119,15 @@ Page {
    }
 
 
-
+        Window {
+            id: showWindow
+            width: 100
+            height: 100
+            Text {
+                id: show_text
+                text: qsTr("text")
+            }
+        }
 
 
     TableView {
@@ -132,64 +140,232 @@ Page {
         id: tableView
         clip: true
 
-
-        Component.onCompleted: {
-            console.log("nffffffffffffffffff")
-        }
-
-        Window {
-            id: showWindow
-            width: 100
-            height: 100
-            Text {
-                id: show_text
-                text: qsTr("text")
-            }
-        }
-
         onDoubleClicked : {
-            console.log(currentRow)
-//            console.log(summoner.matchListModel.get(tableView.currentRow).champion_key_0)
-//            show_text.text = summoner.matchListModel.get(tableView.currentRow).champion_key_0
-//            showWindow.show()
+            console.log(tableView.currentRow)
+            show_text.text = summoner.matchData.champion_key_0
+            showWindow.show()
         }
 
 
-        TableViewColumn {
-            role: "champion_key_1"
-            width: root.width/12
-            delegate:imageDelegate
-        }
-
-
-//        Component {
-//            id: textDelegate
-//            Item {
-//                id: f_item
-//                height: cell_txt.height
-//                Text {
-//                    id: cell_txt
-//                    width: parent.width
-//                    text: model.modelData.champion_key_0
-//                }
-//            }
-//        }
-
-        Component {
-            id: imageDelegate
-            Rectangle {
-                height: image.height
-                Image {
-                    id: image
-                    height: 30
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    fillMode: Image.PreserveAspectFit
-                    cache : true;
-                    asynchronous: true;
-                    source: model.modelData.champion_key_1
+            TableViewColumn {
+                id: col_a
+                role: "match_id"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Text {
+                        color: "#dd5533"
+                        width: parent.width
+                        font.pointSize: 16
+                        textFormat: Text.RichText
+                        wrapMode: Text.WrapAnywhere
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.modelData.match_id
+                    }
                 }
             }
-         }
+
+            TableViewColumn {
+                id: col_b
+                role: "red_win"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Text {
+                        color: model.modelData.red_win ? "#434440" : "#b71924"
+                        width: parent.width
+                        font.pointSize: 16
+                        textFormat: Text.RichText
+                        wrapMode: Text.WrapAnywhere
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.modelData.red_win ? "<b>失败<b>" : "<b>成功<b>"
+                    }
+                }
+            }
+
+                TableViewColumn {
+                id: col_0
+                role: "champion_key_1"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_0
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_1
+                role: "champion_key_1"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_1
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_2
+                role: "champion_key_2"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_2
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_3
+                role: "champion_key_3"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_3
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_4
+                role: "champion_key_4"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_4
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_5
+                role: "champion_key_5"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_5
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_6
+                role: "champion_key_6"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_6
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_7
+                role: "champion_key_7"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_7
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_8
+                role: "champion_key_8"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_8
+                    }
+                }
+            }
+                TableViewColumn {
+                id: col_9
+                role: "champion_key_9"
+                width: root.width / 12
+                delegate:
+                    Rectangle {
+                    Image {
+                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        fillMode: Image.PreserveAspectFit
+                        cache : true
+                        asynchronous: true
+                        source: model.modelData.champion_key_9
+                    }
+                }
+            }
+
+
+
+        rowDelegate:  Rectangle {
+            height: root.height / 12
+        }
+
+        Component.onCompleted: {
+            console.log(model)
+        }
    }
 }

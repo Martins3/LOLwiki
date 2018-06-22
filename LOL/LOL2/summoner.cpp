@@ -321,7 +321,7 @@ QString Summoner::getChampion(int champion_key){
 QVariantList Summoner::getMatchListModel()
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM MatchList");
+    query.prepare("SELECT * FROM MatchList where match_id < 20");
     query.exec();
     dataList.clear();
     QVariantList newList;
@@ -404,4 +404,9 @@ QVariantList Summoner::getMatchListModel()
         newList << QVariant::fromValue(m);
     }
     return newList;
+}
+
+QVariant Summoner::getMatchData()
+{
+    return *(getMatchListModel().begin());
 }
