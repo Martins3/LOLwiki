@@ -196,18 +196,6 @@ Page{
                     highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
 
                     // select some one by choose id !
-                    ListModel{
-                        id: gridModel
-                    }
-
-                    Component.onCompleted: {
-                        for(var i = 0; i < 10; i ++){
-                            gridModel.append({
-                                 name : "hhhhhhh",
-                                 image : "/perk-images/Styles/7200_Domination.png"
-                            })
-                        }
-                    }
 
                     model: summoner.getRune(modelData.id)
 //                    model: gridModel

@@ -128,38 +128,18 @@ Page {
         anchors.bottom: parent.bottom
         width: parent.width
         height: parent.height / 2
-        model: live_alertmodel
+        model: summoner.matchListModel
+        id: tableView
 
         Window {
-            Image{
-                opacity: 0.4
-                anchors.fill: parent
-                smooth: true
-                sourceSize.width: 1215
-                sourceSize.height: 717
-                source: "champion/Aatrox_0.jpg"
-             }
-
             id: showWindow
-            title: "Summoner Spell"
-            maximumWidth: 308
-            maximumHeight: 560
-            minimumWidth: 308
-            minimumHeight:  560
-
-            Text {
-                text: live_alertmodel.get(currentRow).image
-            }
-
-            Text {
-                text: qsTr("text")
-            }
         }
 
 
         onDoubleClicked : {
             console.log(currentRow)
             console.log(live_alertmodel.get(currentRow).image)
+            show_text.text = live_alertmodel.get(tableView.currentRow).image
             showWindow.show()
         }
 
@@ -182,8 +162,6 @@ Page {
         }
 
 
-
-
         Component {
             id: textDelegate
             Item {
@@ -192,7 +170,7 @@ Page {
                 Text {
                     id: cell_txt
                     width: parent.width
-                    text: model.time
+                    text: model.red_win
                 }
             }
         }
@@ -207,7 +185,7 @@ Page {
                     height:20
                     cache : true;
                     asynchronous: true;
-                    source: model.image
+                    source: model.champion_key_0
                 }
             }
          }
