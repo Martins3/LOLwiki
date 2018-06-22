@@ -16,7 +16,7 @@ class Summoner : public QObject
     Q_PROPERTY(QVariant championModel READ getChampionListModel NOTIFY onChampionListModelChanged);
     Q_PROPERTY(QVariant championTagModel READ getChampionTagListModel NOTIFY onChampionTagListModelChanged);
 
-    Q_PROPERTY(QVariant matchListModel READ getMatchListModel NOTIFY onMatchListModelChanged);
+//    Q_PROPERTY(QVariant matchListModel READ getMatchListModel NOTIFY onMatchListModelChanged);
 
     Q_PROPERTY(QVariant matchData READ getMatchData NOTIFY onMatchDataChanged);
 
@@ -29,7 +29,6 @@ public:
     QVariant getItemTagModel();
     QVariant getChampionListModel();
     QVariant getChampionTagListModel();
-    QVariantList getMatchListModel();
     QVariant getMatchData();
 
 
@@ -53,6 +52,8 @@ public slots:
     void itemSelect(const QString & tag, bool add);
     void championSelect(const QString & tag, bool add);
     void userLogin(const QString & name, const QString & password, const bool isLogin);
+
+    QVariantList getMatchListModel();
 private:
     QList<QObject*> dataList;
 
@@ -62,7 +63,7 @@ private:
     QList<QString> itemTag;
     QList<QString> championTag;
 
-    int userId;
+    static int userId;
 
     QString getChampion(int championId);
 };

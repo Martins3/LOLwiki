@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Summoner_t {
     QByteArrayData data[38];
-    char stringdata0[485];
+    char stringdata0[488];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,14 +61,14 @@ QT_MOC_LITERAL(26, 332, 14), // "championSelect"
 QT_MOC_LITERAL(27, 347, 9), // "userLogin"
 QT_MOC_LITERAL(28, 357, 8), // "password"
 QT_MOC_LITERAL(29, 366, 7), // "isLogin"
-QT_MOC_LITERAL(30, 374, 9), // "listModel"
-QT_MOC_LITERAL(31, 384, 17), // "baseRuneListModel"
-QT_MOC_LITERAL(32, 402, 13), // "itemListModel"
-QT_MOC_LITERAL(33, 416, 12), // "itemTagModel"
-QT_MOC_LITERAL(34, 429, 13), // "championModel"
-QT_MOC_LITERAL(35, 443, 16), // "championTagModel"
-QT_MOC_LITERAL(36, 460, 14), // "matchListModel"
-QT_MOC_LITERAL(37, 475, 9) // "matchData"
+QT_MOC_LITERAL(30, 374, 17), // "getMatchListModel"
+QT_MOC_LITERAL(31, 392, 9), // "listModel"
+QT_MOC_LITERAL(32, 402, 17), // "baseRuneListModel"
+QT_MOC_LITERAL(33, 420, 13), // "itemListModel"
+QT_MOC_LITERAL(34, 434, 12), // "itemTagModel"
+QT_MOC_LITERAL(35, 447, 13), // "championModel"
+QT_MOC_LITERAL(36, 461, 16), // "championTagModel"
+QT_MOC_LITERAL(37, 478, 9) // "matchData"
 
     },
     "Summoner\0onMatchDataChanged\0\0"
@@ -81,9 +81,9 @@ QT_MOC_LITERAL(37, 475, 9) // "matchData"
     "remove\0getRune\0parent_id\0itemHandler\0"
     "item_key\0name\0plaintext\0itemSelect\0"
     "tag\0add\0championSelect\0userLogin\0"
-    "password\0isLogin\0listModel\0baseRuneListModel\0"
-    "itemListModel\0itemTagModel\0championModel\0"
-    "championTagModel\0matchListModel\0"
+    "password\0isLogin\0getMatchListModel\0"
+    "listModel\0baseRuneListModel\0itemListModel\0"
+    "itemTagModel\0championModel\0championTagModel\0"
     "matchData"
 };
 #undef QT_MOC_LITERAL
@@ -94,30 +94,31 @@ static const uint qt_meta_data_Summoner[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
-       8,  136, // properties
+      15,   14, // methods
+       7,  142, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        8,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   84,    2, 0x06 /* Public */,
-       3,    0,   85,    2, 0x06 /* Public */,
-       4,    0,   86,    2, 0x06 /* Public */,
-       5,    0,   87,    2, 0x06 /* Public */,
-       6,    0,   88,    2, 0x06 /* Public */,
-       7,    0,   89,    2, 0x06 /* Public */,
-       8,    0,   90,    2, 0x06 /* Public */,
-       9,    0,   91,    2, 0x06 /* Public */,
+       1,    0,   89,    2, 0x06 /* Public */,
+       3,    0,   90,    2, 0x06 /* Public */,
+       4,    0,   91,    2, 0x06 /* Public */,
+       5,    0,   92,    2, 0x06 /* Public */,
+       6,    0,   93,    2, 0x06 /* Public */,
+       7,    0,   94,    2, 0x06 /* Public */,
+       8,    0,   95,    2, 0x06 /* Public */,
+       9,    0,   96,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      10,    6,   92,    2, 0x0a /* Public */,
-      17,    1,  105,    2, 0x0a /* Public */,
-      19,    5,  108,    2, 0x0a /* Public */,
-      23,    2,  119,    2, 0x0a /* Public */,
-      26,    2,  124,    2, 0x0a /* Public */,
-      27,    3,  129,    2, 0x0a /* Public */,
+      10,    6,   97,    2, 0x0a /* Public */,
+      17,    1,  110,    2, 0x0a /* Public */,
+      19,    5,  113,    2, 0x0a /* Public */,
+      23,    2,  124,    2, 0x0a /* Public */,
+      26,    2,  129,    2, 0x0a /* Public */,
+      27,    3,  134,    2, 0x0a /* Public */,
+      30,    0,  141,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -136,9 +137,9 @@ static const uint qt_meta_data_Summoner[] = {
     QMetaType::Void, QMetaType::QString, QMetaType::Bool,   24,   25,
     QMetaType::Void, QMetaType::QString, QMetaType::Bool,   24,   25,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Bool,   21,   28,   29,
+    QMetaType::QVariantList,
 
  // properties: name, type, flags
-      30, QMetaType::QVariant, 0x00495001,
       31, QMetaType::QVariant, 0x00495001,
       32, QMetaType::QVariant, 0x00495001,
       33, QMetaType::QVariant, 0x00495001,
@@ -154,7 +155,6 @@ static const uint qt_meta_data_Summoner[] = {
        1,
        5,
        6,
-       7,
        0,
 
        0        // eod
@@ -181,6 +181,8 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 11: _t->itemSelect((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 12: _t->championSelect((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 13: _t->userLogin((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const bool(*)>(_a[3]))); break;
+        case 14: { QVariantList _r = _t->getMatchListModel();
+            if (_a[0]) *reinterpret_cast< QVariantList*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -254,8 +256,7 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 3: *reinterpret_cast< QVariant*>(_v) = _t->getItemTagModel(); break;
         case 4: *reinterpret_cast< QVariant*>(_v) = _t->getChampionListModel(); break;
         case 5: *reinterpret_cast< QVariant*>(_v) = _t->getChampionTagListModel(); break;
-        case 6: *reinterpret_cast< QVariant*>(_v) = _t->getMatchListModel(); break;
-        case 7: *reinterpret_cast< QVariant*>(_v) = _t->getMatchData(); break;
+        case 6: *reinterpret_cast< QVariant*>(_v) = _t->getMatchData(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
@@ -289,29 +290,29 @@ int Summoner::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 15;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::QueryPropertyScriptable) {
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::QueryPropertyStored) {
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::QueryPropertyEditable) {
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::QueryPropertyUser) {
-        _id -= 8;
+        _id -= 7;
     }
 #endif // QT_NO_PROPERTIES
     return _id;

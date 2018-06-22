@@ -13,8 +13,9 @@
 #include "championtag.h"
 #include "matchlist.h"
 
+int Summoner::userId = 0;
 
-Summoner::Summoner():userId(0)
+Summoner::Summoner()
 {
     QSqlQuery query;
     query.prepare("select distinct tag from ItemTags;");
@@ -224,6 +225,7 @@ void Summoner::userLogin(const QString &name, const QString &password, const boo
     if(isLogin){
         if(found){
             userId = id;
+            qDebug() << "change the id to " << userId;
             emit listModelChanged();
         }else{
             qDebug() << "nobody or mismatch";
@@ -321,7 +323,22 @@ QString Summoner::getChampion(int champion_key){
 QVariantList Summoner::getMatchListModel()
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM MatchList where match_id < 20");
+
+QString s = "select * from MatchList where\
+  :userID = summoner_id_0 or\
+  :userID = summoner_id_1 or\
+  :userID = summoner_id_2 or\
+  :userID = summoner_id_3 or\
+  :userID = summoner_id_4 or\
+  :userID = summoner_id_5 or\
+  :userID = summoner_id_6 or\
+  :userID = summoner_id_7 or\
+  :userID = summoner_id_8 or\
+  :userID = summoner_id_9 order by match_id limit 10;";
+
+    query.prepare(s);
+    query.bindValue(":userID", userId);
+    qDebug() << "query userId " << userId;
     query.exec();
     dataList.clear();
     QVariantList newList;

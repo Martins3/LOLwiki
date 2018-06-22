@@ -22,7 +22,8 @@ Page {
     }
 
     function refrshe(){
-        console.log("home refresh ffffffffff itself")
+        tableView.__model = summoner.getMatchListModel()
+//      tableView.update(summoner.getMatchListModel())
     }
 
     Row{
@@ -136,7 +137,7 @@ Page {
         anchors.bottom: parent.bottom
         width: parent.width
         height: parent.height / 2
-        model: summoner.matchListModel
+        model: summoner.getMatchListModel()
         id: tableView
         clip: true
 
@@ -145,7 +146,6 @@ Page {
             show_text.text = summoner.matchData.champion_key_0
             showWindow.show()
         }
-
 
             TableViewColumn {
                 id: col_a
@@ -357,7 +357,6 @@ Page {
                     }
                 }
             }
-
 
 
         rowDelegate:  Rectangle {
