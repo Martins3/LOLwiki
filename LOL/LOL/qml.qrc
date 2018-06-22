@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>MainInterface.qml</file>
         <file>HomeForm.qml</file>
         <file>Champion.qml</file>
         <file>SummonerSpell.qml</file>
@@ -20,8 +19,6 @@
         <file>Summoner/SummonerSmite.png</file>
         <file>Summoner/SummonerSnowball.png</file>
         <file>Summoner/SummonerTeleport.png</file>
-        <file>backend.cpp</file>
-        <file>backend.h</file>
         <file>dbhandler.h</file>
         <file>main.cpp</file>
         <file>summoner.h</file>

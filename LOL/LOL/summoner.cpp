@@ -12,7 +12,7 @@
 #include "championtag.h"
 
 
-Summoner::Summoner()
+Summoner::Summoner():userId(0)
 {
     QSqlQuery query;
     query.prepare("select distinct tag from ItemTags;");
@@ -198,6 +198,54 @@ void Summoner::championSelect(const QString &tag, bool add)
        championTag.append(tag);
     }else{
        championTag.removeOne(tag);
+    }
+}
+
+void Summoner::userLogin(const QString &name, const QString &password, const bool isLogin)
+{
+
+    QSqlQuery query;
+    qDebug() << name;
+    qDebug() << password;
+
+    bool found = false;
+    int id;
+    query.prepare("SELECT id FROM Summoner where name = :name and password = :password");
+    query.bindValue(":name", name);
+    query.bindValue(":password", password);
+    qDebug() << "login query : " << query.exec();
+    if(query.next()){
+        found = true;
+        id = query.value(0).toInt();
+    }
+
+    if(isLogin){
+        if(found){
+            userId = id;
+            emit listModelChanged();
+        }else{
+            qDebug() << "nobody or mismatch";
+        }
+    }else{
+        emit listModelChanged();
+        return;
+        if(!found){
+            int id;
+            query.prepare("select max(id) from Summoner;");
+            query.exec();
+            if(query.next())
+                id = query.value(0).toInt() + 1;
+            else
+                qDebug() << "----------- impossible -----";
+
+            query.prepare("insert into Summoner values(:id, :name, :password)");
+            query.bindValue(":id", id);
+            query.bindValue(":name", name);
+            query.bindValue(":password", password);
+            qDebug() << "insert a new user : " << query.exec();
+            userId = id;
+            emit listModelChanged();
+        }
     }
 }
 

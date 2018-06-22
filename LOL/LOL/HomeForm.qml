@@ -3,17 +3,27 @@ import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.5
 import QtCharts 2.2
+import show.summoner 1.0
+
 Page {
     title: qsTr("Home")
     id:root
     Image{
-        opacity: 0.4
+        opacity: 0.9
         anchors.fill: parent
         smooth: true
         sourceSize.width: 1215
         sourceSize.height: 717
         source: "champion/Ahri_7.jpg"
-     }
+    }
+
+    Summoner{
+        id:summoner
+    }
+
+    function refrshe(){
+        console.log("home refresh itself")
+    }
 
     Row{
         anchors.top: parent.top
@@ -71,7 +81,6 @@ Page {
             }
         }
 
-
         Column{
             width: parent.width / 3
             height: parent.height
@@ -114,26 +123,68 @@ Page {
 
 
     TableView {
-        opacity: 0.5
+        opacity: 0.9
+        headerVisible: false
         anchors.bottom: parent.bottom
         width: parent.width
         height: parent.height / 2
         model: live_alertmodel
+
+        Window {
+            Image{
+                opacity: 0.4
+                anchors.fill: parent
+                smooth: true
+                sourceSize.width: 1215
+                sourceSize.height: 717
+                source: "champion/Aatrox_0.jpg"
+             }
+
+            id: showWindow
+            title: "Summoner Spell"
+            maximumWidth: 308
+            maximumHeight: 560
+            minimumWidth: 308
+            minimumHeight:  560
+
+            Text {
+                text: live_alertmodel.get(currentRow).image
+            }
+
+            Text {
+                text: qsTr("text")
+            }
+        }
+
+
+        onDoubleClicked : {
+            console.log(currentRow)
+            console.log(live_alertmodel.get(currentRow).image)
+            showWindow.show()
+        }
+
         TableViewColumn {
             role: "time"
-            title: "Time"
-            width: root.width/4
+            width: root.width/12
+            delegate:textDelegate
+        }
+
+        TableViewColumn {
+            role: "time"
+            width: root.width/12
             delegate:textDelegate
         }
 
         TableViewColumn {
             role: "image"
-            title: "Image"
-            width: root.width/4
+            width: root.width/12
             delegate:imageDelegate
         }
 
-    Component  {
+
+
+
+        Component {
             id: textDelegate
             Item {
                 id: f_item

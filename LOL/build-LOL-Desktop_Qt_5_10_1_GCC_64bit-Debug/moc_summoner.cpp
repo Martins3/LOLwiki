@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Summoner_t {
-    QByteArrayData data[31];
-    char stringdata0[390];
+    QByteArrayData data[34];
+    char stringdata0[417];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -56,12 +56,15 @@ QT_MOC_LITERAL(21, 270, 10), // "itemSelect"
 QT_MOC_LITERAL(22, 281, 3), // "tag"
 QT_MOC_LITERAL(23, 285, 3), // "add"
 QT_MOC_LITERAL(24, 289, 14), // "championSelect"
-QT_MOC_LITERAL(25, 304, 9), // "listModel"
-QT_MOC_LITERAL(26, 314, 17), // "baseRuneListModel"
-QT_MOC_LITERAL(27, 332, 13), // "itemListModel"
-QT_MOC_LITERAL(28, 346, 12), // "itemTagModel"
-QT_MOC_LITERAL(29, 359, 13), // "championModel"
-QT_MOC_LITERAL(30, 373, 16) // "championTagModel"
+QT_MOC_LITERAL(25, 304, 9), // "userLogin"
+QT_MOC_LITERAL(26, 314, 8), // "password"
+QT_MOC_LITERAL(27, 323, 7), // "isLogin"
+QT_MOC_LITERAL(28, 331, 9), // "listModel"
+QT_MOC_LITERAL(29, 341, 17), // "baseRuneListModel"
+QT_MOC_LITERAL(30, 359, 13), // "itemListModel"
+QT_MOC_LITERAL(31, 373, 12), // "itemTagModel"
+QT_MOC_LITERAL(32, 386, 13), // "championModel"
+QT_MOC_LITERAL(33, 400, 16) // "championTagModel"
 
     },
     "Summoner\0itemTagModelChanged\0\0"
@@ -73,7 +76,8 @@ QT_MOC_LITERAL(30, 373, 16) // "championTagModel"
     "cooldown\0description\0image\0remove\0"
     "getRune\0parent_id\0itemHandler\0item_key\0"
     "name\0plaintext\0itemSelect\0tag\0add\0"
-    "championSelect\0listModel\0baseRuneListModel\0"
+    "championSelect\0userLogin\0password\0"
+    "isLogin\0listModel\0baseRuneListModel\0"
     "itemListModel\0itemTagModel\0championModel\0"
     "championTagModel"
 };
@@ -85,27 +89,28 @@ static const uint qt_meta_data_Summoner[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
-       6,  112, // properties
+      12,   14, // methods
+       6,  124, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x06 /* Public */,
-       3,    0,   70,    2, 0x06 /* Public */,
-       4,    0,   71,    2, 0x06 /* Public */,
-       5,    0,   72,    2, 0x06 /* Public */,
-       6,    0,   73,    2, 0x06 /* Public */,
-       7,    0,   74,    2, 0x06 /* Public */,
+       1,    0,   74,    2, 0x06 /* Public */,
+       3,    0,   75,    2, 0x06 /* Public */,
+       4,    0,   76,    2, 0x06 /* Public */,
+       5,    0,   77,    2, 0x06 /* Public */,
+       6,    0,   78,    2, 0x06 /* Public */,
+       7,    0,   79,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    6,   75,    2, 0x0a /* Public */,
-      15,    1,   88,    2, 0x0a /* Public */,
-      17,    5,   91,    2, 0x0a /* Public */,
-      21,    2,  102,    2, 0x0a /* Public */,
-      24,    2,  107,    2, 0x0a /* Public */,
+       8,    6,   80,    2, 0x0a /* Public */,
+      15,    1,   93,    2, 0x0a /* Public */,
+      17,    5,   96,    2, 0x0a /* Public */,
+      21,    2,  107,    2, 0x0a /* Public */,
+      24,    2,  112,    2, 0x0a /* Public */,
+      25,    3,  117,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -121,14 +126,15 @@ static const uint qt_meta_data_Summoner[] = {
     QMetaType::Void, QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Bool,   18,   13,   19,   20,   14,
     QMetaType::Void, QMetaType::QString, QMetaType::Bool,   22,   23,
     QMetaType::Void, QMetaType::QString, QMetaType::Bool,   22,   23,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Bool,   19,   26,   27,
 
  // properties: name, type, flags
-      25, QMetaType::QVariant, 0x00495001,
-      26, QMetaType::QVariant, 0x00495001,
-      27, QMetaType::QVariant, 0x00495001,
       28, QMetaType::QVariant, 0x00495001,
       29, QMetaType::QVariant, 0x00495001,
       30, QMetaType::QVariant, 0x00495001,
+      31, QMetaType::QVariant, 0x00495001,
+      32, QMetaType::QVariant, 0x00495001,
+      33, QMetaType::QVariant, 0x00495001,
 
  // properties: notify_signal_id
        1,
@@ -159,6 +165,7 @@ void Summoner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 8: _t->itemHandler((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4])),(*reinterpret_cast< bool(*)>(_a[5]))); break;
         case 9: _t->itemSelect((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 10: _t->championSelect((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 11: _t->userLogin((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const bool(*)>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -251,13 +258,13 @@ int Summoner::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 12;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty

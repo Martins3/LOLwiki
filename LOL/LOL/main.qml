@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import show.summoner 1.0
 
 ApplicationWindow {
     id: window
@@ -8,7 +9,11 @@ ApplicationWindow {
     height: 358
     title: qsTr("最后的轻语")
 
+
     property bool loginOk: false
+    Summoner{
+        id: lolHandler
+    }
 
     SummonerSpell{
         width: parent.width
@@ -124,8 +129,17 @@ ApplicationWindow {
     Connections{
         target: login
         onLogin:{
-            loginOk = true
-            stackView.push(homeForm)
+            lolHandler.userLogin(username, password, isLogin);
         }
     }
+
+    Connections{
+        target: lolHandler
+        onListModelChanged:{
+            loginOk = true
+            stackView.push(homeForm)
+            homeForm.refrshe()
+        }
+    }
+
 }

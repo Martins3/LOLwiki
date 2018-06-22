@@ -7,7 +7,7 @@ Page{
     visible: true
     id: loginWindow
     title: qsTr("Login")
-    signal login(string username, string password, string status)
+    signal login(string username, string password, bool isLogin)
 
     Image{
         anchors.fill: parent
@@ -24,47 +24,40 @@ Column {
     property bool logining
     property bool  signUping
 
-    Row {
-        TextField {
-            objectName: "usernameInput"
-            id: usernameInput
-            placeholderText: "UserName"
-            inputMethodHints: Qt.ImhEmailCharactersOnly
-            KeyNavigation.tab: passwordInput
-            KeyNavigation.down: passwordInput
 
-            onAccepted: {
-                console.log("password accepted !")
-                if (usernameInput.text.length > 0 && passwordInput.text.length > 0) {
-                    loginView.logining = true
-                    loginWindow.login(usernameInput.text, passwordInput.text, "chat")
-                }
+        Row {
+            TextField {
+                objectName: "usernameInput"
+                id: usernameInput
+                placeholderText: "UserName"
+                inputMethodHints: Qt.ImhEmailCharactersOnly
+                KeyNavigation.tab: passwordInput
+                KeyNavigation.down: passwordInput
             }
         }
-    }
 
-    Row {
-        TextField {
-            objectName: "passwordInput"
-            id: passwordInput
-            echoMode: TextInput.Password
-            KeyNavigation.tab: usernameInput
-
-            onAccepted: {
-                if (usernameInput.text.length > 0 && passwordInput.text.length > 0) {
-                    loginView.logining = true
-                    loginWindow.login(usernameInput.text, passwordInput.text, "chat")
-
-                }
+        Row {
+            TextField {
+                objectName: "passwordInput"
+                id: passwordInput
+                echoMode: TextInput.Password
+                KeyNavigation.tab: usernameInput
             }
         }
-    }
 
         Row {
             spacing: 4
             CheckBox {
                 objectName: "savePass"
                 id: savePass
+                checked: false
+                onClicked: {
+                    if(checked){
+                        console.log('Remember you')
+                    }else{
+                        console.log('Forget you')
+                    }
+                }
             }
             Label{
                 anchors.verticalCenter: parent.verticalCenter
@@ -72,6 +65,7 @@ Column {
                 color: "black"
             }
         }
+
         Row{
         Item {
             width: loginConfirm.width
@@ -83,9 +77,9 @@ Column {
                 text: "Login"
                 visible: !loginView.logining
                 onClicked: {
-                    if (usernameInput.text.length >= 0 && passwordInput.text.length >= 0) {
+                    if (usernameInput.text.length >= 1 && passwordInput.text.length >= 1) {
                         loginView.logining = true
-                        loginWindow.login(usernameInput.text, passwordInput.text, "chat")
+                        loginWindow.login(usernameInput.text, passwordInput.text, true)
                     }
                 }
             }
@@ -100,19 +94,18 @@ Column {
             height: signUpConfirm.height
             Button {
                 width: passwordInput.width / 2
-                objectName: "loginConfirm"
+                objectName: "signUpConfirm"
                 id: signUpConfirm
                 text: "Signup"
                 visible: !loginView.logining
                 onClicked: {
                     if (usernameInput.text.length >= 0 && passwordInput.text.length >= 0) {
                         loginView.logining = true
-//                        loginWindow.login(usernameInput.text, passwordInput.text, "chat")
+                        loginWindow.login(usernameInput.text, passwordInput.text, false)
                     }
                 }
             }
             BusyIndicator{
-
                 visible: true
                 running: loginView.signUping
             }

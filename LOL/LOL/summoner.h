@@ -34,6 +34,7 @@ signals:
     void onChampionListModelChanged();
     void onChampionTagListModelChanged();
 
+
 public slots:
     void summonerSpellhandler(const int key, const QString &new_id, const int cooldown,
                                     const QString & description, const QString & image, const bool remove);
@@ -43,6 +44,7 @@ public slots:
     void itemSelect(const QString & tag, bool add);
     void championSelect(const QString & tag, bool add);
 
+    void userLogin(const QString & name, const QString & password, const bool isLogin);
 private:
     QList<QObject*> dataList;
 
@@ -51,6 +53,8 @@ private:
 
     QList<QString> itemTag;
     QList<QString> championTag;
+
+    int userId;
 };
 
 #endif // SUMMONER_H
