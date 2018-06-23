@@ -23,7 +23,9 @@ SOURCES += main.cpp \
     objectWraper.cpp \
     champion.cpp \
     championtag.cpp \
-    matchlist.cpp
+    matchlist.cpp \
+    championStat.cpp \
+    championInfo.cpp
 
 RESOURCES += qml.qrc
 
@@ -47,4 +49,6 @@ HEADERS += \
     objectWraper.h \
     champion.h \
     championtag.h \
-    matchlist.h
+    matchlist.h \
+    championStat.h \
+    championInfo.h

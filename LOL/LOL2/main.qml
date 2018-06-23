@@ -9,7 +9,6 @@ ApplicationWindow {
     height: 358
     title: qsTr("最后的轻语")
 
-
     property bool loginOk: false
     Summoner{
         id: lolHandler

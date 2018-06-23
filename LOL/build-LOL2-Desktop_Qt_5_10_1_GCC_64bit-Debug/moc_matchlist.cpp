@@ -1229,7 +1229,7 @@ void MatchList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
 }
 
 QT_INIT_METAOBJECT const QMetaObject MatchList::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_MatchList.data,
+    { &QAbstractListModel::staticMetaObject, qt_meta_stringdata_MatchList.data,
       qt_meta_data_MatchList,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -1244,12 +1244,12 @@ void *MatchList::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_MatchList.stringdata0))
         return static_cast<void*>(this);
-    return QObject::qt_metacast(_clname);
+    return QAbstractListModel::qt_metacast(_clname);
 }
 
 int MatchList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = QAbstractListModel::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

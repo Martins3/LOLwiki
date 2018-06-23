@@ -1,8 +1,9 @@
 #ifndef MATCHLIST_H
 #define MATCHLIST_H
 
+#include <QAbstractItemModel>
 #include <QObject>
-class MatchList: public QObject
+class MatchList: public QAbstractListModel
 {
 public:
     Q_OBJECT
@@ -302,5 +303,10 @@ signals:
     void kill_num_9Changed();
     void death_num_9Changed();
     void assit_num_9Changed();
+
+    // QAbstractItemModel interface
+public:
+    int rowCount(const QModelIndex &parent) const;
+    QVariant data(const QModelIndex &index, int role) const;
 };
 #endif

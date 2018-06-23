@@ -3,7 +3,12 @@
 
 #include <QObject>
 #include <QString>
+#include <QSqlQuery>
+#include <QVariantList>
+#include <iostream>
+#include <string>
 #include <QVariant>
+#include "matchlist.h"
 
 class Summoner : public QObject
 {
@@ -16,9 +21,9 @@ class Summoner : public QObject
     Q_PROPERTY(QVariant championModel READ getChampionListModel NOTIFY onChampionListModelChanged);
     Q_PROPERTY(QVariant championTagModel READ getChampionTagListModel NOTIFY onChampionTagListModelChanged);
 
-//    Q_PROPERTY(QVariant matchListModel READ getMatchListModel NOTIFY onMatchListModelChanged);
+    Q_PROPERTY(QVariant matchListModel READ getMatchListModel NOTIFY onMatchListModelChanged);
 
-    Q_PROPERTY(QVariant matchData READ getMatchData NOTIFY onMatchDataChanged);
+//    Q_PROPERTY(QVariant matchData READ getMatchData NOTIFY onMatchDataChanged);
 
 
 public:
@@ -29,11 +34,10 @@ public:
     QVariant getItemTagModel();
     QVariant getChampionListModel();
     QVariant getChampionTagListModel();
-    QVariant getMatchData();
-
+    QVariantList getMatchListModel();
 
 signals:
-    void onMatchDataChanged();
+//    void onMatchDataChanged();
     void itemTagModelChanged();
     void listModelChanged();
     void itemListModelChanged();
@@ -53,7 +57,9 @@ public slots:
     void championSelect(const QString & tag, bool add);
     void userLogin(const QString & name, const QString & password, const bool isLogin);
 
-    QVariantList getMatchListModel();
+    QVariant getMatchData(int match_id);
+    QVariant getChampionStat(int champion_key);
+    QVariant getChampionInfo(int champion_key);
 private:
     QList<QObject*> dataList;
 
@@ -65,7 +71,8 @@ private:
 
     static int userId;
 
-    QString getChampion(int championId);
+    QString getChampion(int championId, bool isName);
+    MatchList *getNext(QSqlQuery &query, bool isTitle);
 };
 
 #endif // SUMMONER_H

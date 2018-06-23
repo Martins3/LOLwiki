@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>../LOL2/spell/AatroxE.png</file>
+    </qresource>
+</RCC>
