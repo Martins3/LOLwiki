@@ -155,5 +155,6 @@
         <file>champion/Zoe.png</file>
         <file>champion/Zyra.png</file>
         <file>spell/AatroxE.png</file>
+        <file>sticker/poro-angry.png</file>
     </qresource>
 </RCC>

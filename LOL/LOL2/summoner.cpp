@@ -45,7 +45,7 @@ QVariant Summoner::getListModel()
     while(query.next()) {
         int key = query.value(0).toInt();
         QString id = query.value(1).toString();
-        QString image = QString::fromStdString(std::string("spell/")) + query.value(4).toString();
+        QString image = query.value(4).toString();
         QString des = query.value(3).toString();
         int cooldown = query.value(2).toInt();
         dataList.append(new SummonerSpell(key, id, image, des, cooldown));
@@ -76,7 +76,7 @@ QVariant Summoner::getItemListModel()
     while(query.next()) {
         int key = query.value(0).toInt();
         QString id = query.value(2).toString();
-        QString image = QString::fromStdString(std::string("item/")) + query.value(1).toString();
+        QString image = query.value(1).toString();
         QString des = query.value(3).toString();
         dataList.append(new ItemData(key, image, id, des));
     }
@@ -293,12 +293,11 @@ QVariant Summoner::getChampionListModel()
     dataList.clear();
     while(query.next()) {
         QString blurb = query.value(0).toString();
-        QString id = query.value(1).toString();
-        QString image = "champion/" + query.value(2).toString();
-        int champion_key = query.value(3).toInt();
-        QString name = query.value(4).toString();
-        QString title = query.value(5).toString();
-        dataList.append(new Champion(blurb, id, image, champion_key, name, title));
+        QString image = query.value(1).toString();
+        int champion_key = query.value(2).toInt();
+        QString name = query.value(3).toString();
+        QString title = query.value(4).toString();
+        dataList.append(new Champion(blurb, image, champion_key, name, title));
     }
     return QVariant::fromValue(dataList);
 }
@@ -324,7 +323,7 @@ QString Summoner::getChampion(int champion_key, bool isTitle){
     if(!isTitle)
         a = "champion/";
     if(query.next())
-        return  a + query.value(0).toString();
+        return query.value(0).toString();
     qDebug() << "------------- Champion foriegn key voliate --------------";
     a = a + "Ashe.png";
     return a;
@@ -489,7 +488,6 @@ QVariant Summoner::getChampionStat(int champion_key)
     return QVariant::fromValue(NULL);
 }
 
-
 QVariant Summoner::getChampionInfo(int champion_key)
 {
     QSqlQuery query;
@@ -508,4 +506,154 @@ QVariant Summoner::getChampionInfo(int champion_key)
 
     qDebug() << "failed !!!!!!";
     return QVariant::fromValue(NULL);
+}
+
+
+void Summoner::championStathandler(const int champion_key ,const double armor ,const double armorperlevel ,const double attackdamage ,const double attackdamageperlevel ,const int attackrange ,const double attackspeedoffset ,const double attackspeedperlevel ,const double crit ,const double critperlevel ,const int hp ,const int hpperlevel ,const double hpregen ,const double hpregenperlevel ,const int movespeed ,const int mp ,const int mpperlevel ,const int mpregen ,const int mpregenperlevel ,const double spellblock ,const double spellblockperlevel ,const bool remove){
+        QSqlQuery query;
+        qDebug() << "stat handler : " << champion_key;
+        if(remove){
+            query.prepare("delete from ChampionStat where champion_key= :champion_key");
+            query.bindValue(":champion_key", champion_key);
+            qDebug() << query.exec();
+            return;
+        }
+        if(champion_key != -1){
+            query.prepare("update ChampionStat set armor = :armor,armorperlevel = :armorperlevel,attackdamage = :attackdamage,attackdamageperlevel = :attackdamageperlevel,attackrange = :attackrange,attackspeedoffset = :attackspeedoffset,attackspeedperlevel = :attackspeedperlevel,crit = :crit,critperlevel = :critperlevel,hp = :hp,hpperlevel = :hpperlevel,hpregen = :hpregen,hpregenperlevel = :hpregenperlevel,movespeed = :movespeed,mp = :mp,mpperlevel = :mpperlevel,mpregen = :mpregen,mpregenperlevel = :mpregenperlevel,spellblock = :spellblock,spellblockperlevel = :spellblockperlevel where champion_key = :champion_key");
+            query.bindValue(":champion_key",champion_key);
+            query.bindValue(":armor",armor);
+            query.bindValue(":armorperlevel",armorperlevel);
+            query.bindValue(":attackdamage",attackdamage);
+            query.bindValue(":attackdamageperlevel",attackdamageperlevel);
+            query.bindValue(":attackrange",attackrange);
+            query.bindValue(":attackspeedoffset",attackspeedoffset);
+            query.bindValue(":attackspeedperlevel",attackspeedperlevel);
+            query.bindValue(":crit",crit);
+            query.bindValue(":critperlevel",critperlevel);
+            query.bindValue(":hp",hp);
+            query.bindValue(":hpperlevel",hpperlevel);
+            query.bindValue(":hpregen",hpregen);
+            query.bindValue(":hpregenperlevel",hpregenperlevel);
+            query.bindValue(":movespeed",movespeed);
+            query.bindValue(":mp",mp);
+            query.bindValue(":mpperlevel",mpperlevel);
+            query.bindValue(":mpregen",mpregen);
+            query.bindValue(":mpregenperlevel",mpregenperlevel);
+            query.bindValue(":spellblock",spellblock);
+            query.bindValue(":spellblockperlevel",spellblockperlevel);
+            qDebug() << "update result" << query.exec();
+        }else if(champion_key == -1){
+            int _champion_key;
+            query.prepare("select max(champion_key) from ChampionInfo;");
+            qDebug() << query.exec();
+            if(query.next())
+                _champion_key = query.value(0).toInt() + 1;
+            else
+                return;
+            query.prepare("insert into ChampionStat values(:champion_key, :armor, :armorperlevel, :attackdamage, :attackdamageperlevel, :attackrange, :attackspeedoffset, :attackspeedperlevel, :crit, :critperlevel, :hp, :hpperlevel, :hpregen, :hpregenperlevel, :movespeed, :mp, :mpperlevel, :mpregen, :mpregenperlevel, :spellblock, :spellblockperlevel)");
+            query.bindValue(":champion_key",_champion_key);
+            query.bindValue(":armor",armor);
+            query.bindValue(":armorperlevel",armorperlevel);
+            query.bindValue(":attackdamage",attackdamage);
+            query.bindValue(":attackdamageperlevel",attackdamageperlevel);
+            query.bindValue(":attackrange",attackrange);
+            query.bindValue(":attackspeedoffset",attackspeedoffset);
+            query.bindValue(":attackspeedperlevel",attackspeedperlevel);
+            query.bindValue(":crit",crit);
+            query.bindValue(":critperlevel",critperlevel);
+            query.bindValue(":hp",hp);
+            query.bindValue(":hpperlevel",hpperlevel);
+            query.bindValue(":hpregen",hpregen);
+            query.bindValue(":hpregenperlevel",hpregenperlevel);
+            query.bindValue(":movespeed",movespeed);
+            query.bindValue(":mp",mp);
+            query.bindValue(":mpperlevel",mpperlevel);
+            query.bindValue(":mpregen",mpregen);
+            query.bindValue(":mpregenperlevel",mpregenperlevel);
+            query.bindValue(":spellblock",spellblock);
+            query.bindValue(":spellblockperlevel",spellblockperlevel);
+            qDebug() << query.exec();
+    }
+}
+
+
+void Summoner::championInfohandler(const int champion_key ,const int info_attack ,const int info_defense ,const int info_difficulty ,const int info_magic ,const bool remove){
+        QSqlQuery query;
+        if(remove){
+            query.prepare("delete from ChampionInfo where champion_key= :champion_key");
+            query.bindValue(":champion_key", champion_key);
+            qDebug() << query.exec();
+            return;
+        }
+        if(champion_key != -1){
+            qDebug() << "values : -----";
+            qDebug() << info_attack;
+            qDebug() << info_defense;
+            qDebug() << info_difficulty;
+            qDebug() << info_magic;
+            query.prepare("update ChampionInfo set info_attack = :info_attack,info_defense = :info_defense, info_difficulty = :info_difficulty, info_magic = :info_magic where champion_key = :champion_key");
+            query.bindValue(":champion_key",champion_key);
+            query.bindValue(":info_attack",info_attack);
+            query.bindValue(":info_defense",info_defense);
+            query.bindValue(":info_difficulty",info_difficulty);
+            query.bindValue(":info_magic",info_magic);
+            qDebug() << "update info " << query.exec();
+
+        }else if(champion_key == -1){
+            int _champion_key;
+            query.prepare("select max(champion_key) from ChampionInfo;");
+            qDebug() << query.exec();
+            if(query.next())
+                _champion_key = query.value(0).toInt() + 1;
+            else
+                return;
+            query.prepare("insert into ChampionInfo values(:champion_key, :info_attack, :info_defense, :info_difficulty, :info_magic)");
+            query.bindValue(":champion_key", _champion_key);
+            query.bindValue(":info_attack",info_attack);
+            query.bindValue(":info_defense",info_defense);
+            query.bindValue(":info_difficulty",info_difficulty);
+            query.bindValue(":info_magic",info_magic);
+
+            qDebug() << query.exec();
+    }
+}
+
+
+void Summoner::championhandler(const int champion_key ,const QString & blurb ,const QString & image ,const QString & name ,const QString & title ,const bool remove){
+        QSqlQuery query;
+        if(remove){
+            query.prepare("delete from Champion where champion_key= :champion_key");
+            query.bindValue(":champion_key", champion_key);
+            qDebug() << query.exec();
+            return;
+        }
+        if(champion_key != -1){
+            qDebug() << "update image " << image;
+            query.prepare("update Champion set blurb = :blurb, image = :image,name = :name,title = :title where champion_key = :champion_key");
+            query.bindValue(":champion_key",champion_key);
+            query.bindValue(":blurb",blurb);
+            query.bindValue(":image",image);
+            query.bindValue(":name",name);
+            query.bindValue(":title",title);
+
+            qDebug() << query.exec();
+
+        }else if(champion_key == -1){
+            int _champion_key;
+            query.prepare("select max(champion_key) from Champion;");
+            qDebug() << query.exec();
+            if(query.next())
+                _champion_key = query.value(0).toInt() + 1;
+            else
+                return;
+            qDebug() << "allocated key " << _champion_key;
+            qDebug() << "new image locaiton " << image;
+            query.prepare("insert into Champion values( :blurb, :image, :champion_key, :name, :title)");
+            query.bindValue(":champion_key",_champion_key);
+            query.bindValue(":blurb",blurb);
+            query.bindValue(":image",image);
+            query.bindValue(":name",name);
+            query.bindValue(":title",title);
+            qDebug() << query.exec();
+    }
 }

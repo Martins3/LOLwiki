@@ -24,7 +24,7 @@ QString Champion::getTitle()
 return title;
 }
 
-Champion::Champion(QString blurb, QString id, QString image, int champion_key, QString name, QString title):
-blurb(blurb),id(id),image(image),champion_key(champion_key),name(name),title(title){
+Champion::Champion(QString blurb,  QString image, int champion_key, QString name, QString title):
+blurb(blurb),image(image),champion_key(champion_key),name(name),title(title){
 
 }

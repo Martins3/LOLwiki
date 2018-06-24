@@ -756,6 +756,7 @@ qrc_qml.cpp: ../LOL2/qml.qrc \
 		../LOL2/SummonerSpell.qml \
 		../LOL2/main.qml \
 		../LOL2/spell/AatroxE.png \
+		../LOL2/sticker/poro-angry.png \
 		../LOL2/champion/Olaf.png \
 		../LOL2/champion/Ziggs.png \
 		../LOL2/champion/Amumu.png \

@@ -10,6 +10,7 @@ Page{
     id: mainWindow
     Summoner{id: summoner}
     title: qsTr("Champion")
+    property bool writeBck: false
 
     Image{
         opacity: 1
@@ -58,8 +59,10 @@ Page{
                 anchors.fill: parent
                 onClicked: {
                     if (mouse.button & Qt.RightButton) {
-                        addWindow.title = -1
-                        addWindow.show()
+                       editWindow.title = -1
+                       edit_image.source = "qrc:/sticker/poro-angry.png"
+                       writeBck = true;
+                       editWindow.show()
                     }
                 }
             }
@@ -90,16 +93,73 @@ Page{
                                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                                         onClicked:  {
                                             grid.currentIndex = index
-                                            console.log(index)
-                                            if (mouse.button & Qt.RightButton) {
+                                            var info = summoner.getChampionInfo(model.modelData.champion_key)
+                                            var stat = summoner.getChampionStat(model.modelData.champion_key)
+
+                                            if (mouse.button & Qt.LeftButton) {
+                                                writeBck = false;
+                                                edit_name.enabled = false
+                                                edit_blurb.enabled = false
+                                                edit_title.enabled = false
+                                                s1.enabled = false
+                                                s2.enabled = false
+                                                s3.enabled = false
+                                                s4.enabled = false
+
+                                                edit_name.text = model.modelData.name
+                                                edit_image.source = model.modelData.image
+                                                edit_blurb.text = model.modelData.blurb
+                                                edit_title.text = model.modelData.title
+                                                editWindow.title = model.modelData.champion_key
+
+
+
+                                                s1.value = info.info_attack * 0.1
+                                                s2.value = info.info_defense * 0.1
+                                                s3.value = info.info_difficulty * 0.1
+                                                s4.value = info.info_magic * 0.1
+
+                                                stat_text_0.text = stat.armor
+                                                stat_text_1.text = stat.armorperlevel
+                                                stat_text_2.text = stat.attackdamage
+                                                stat_text_3.text = stat.attackdamageperlevel
+                                                stat_text_4.text = stat.attackrange
+                                                stat_text_5.text = stat.attackspeedoffset
+                                                stat_text_6.text = stat.attackspeedperlevel
+                                                stat_text_7.text = stat.crit
+                                                stat_text_8.text = stat.critperlevel
+                                                stat_text_9.text = stat.hp
+                                                stat_text_10.text = stat.hpperlevel
+                                                stat_text_11.text = stat.hpregen
+                                                stat_text_12.text = stat.hpregenperlevel
+                                                stat_text_13.text = stat.movespeed
+                                                stat_text_14.text = stat.mp
+                                                stat_text_15.text = stat.mpperlevel
+                                                stat_text_16.text = stat.mpregen
+                                                stat_text_17.text = stat.mpregenperlevel
+                                                stat_text_18.text = stat.spellblock
+                                                stat_text_19.text = stat.spellblockperlevel
+
+                                                editWindow.show()
+                                            } else if (mouse.button & Qt.RightButton) {
+                                                writeBck = true;
+                                                edit_name.enabled = true
+                                                edit_name.text = ""
+                                                edit_blurb.enabled = true
+                                                edit_blurb.text = ""
+                                                edit_title.enabled = true
+                                                edit_title.text = ""
+                                                s1.enabled = true
+                                                s2.enabled = true
+                                                s3.enabled = true
+                                                s4.enabled = true
+
                                                 edit_name.placeholderText = model.modelData.name
                                                 edit_image.source = model.modelData.image
                                                 edit_blurb.placeholderText = model.modelData.blurb
                                                 edit_title.placeholderText = model.modelData.title
                                                 editWindow.title = model.modelData.champion_key
 
-                                                var info = summoner.getChampionInfo(model.modelData.champion_key)
-                                                var stat = summoner.getChampionStat(model.modelData.champion_key)
 
 
                                                 s1.value = info.info_attack * 0.1
@@ -128,14 +188,7 @@ Page{
                                                 stat_text_18.placeholderText = stat.spellblock
                                                 stat_text_19.placeholderText = stat.spellblockperlevel
 
-
                                                 editWindow.show()
-                                            } else if (mouse.button & Qt.LeftButton) {
-                                                show_name.text = model.modelData.name
-                                                show_image.source = model.modelData.image
-                                                show_plaintext.text = model.modelData.description
-                                                showWindow.title = model.modelData.key
-                                                showWindow.show()
                                             }
                                         }
                                     }
@@ -172,7 +225,7 @@ Page{
             spacing: 20
             Column{
                 width: 308
-                    spacing: 10
+                    spacing: 4
                     Label{
                         text : "名称"
                         width: parent.width
@@ -219,8 +272,8 @@ Page{
 
                     Image {
                         id: edit_image
-                        width: 80
-                        height: 80
+                        width: 60
+                        height: 60
                         anchors.left: parent.left
                         anchors.leftMargin: (parent.width - width) / 2
                         MouseArea {
@@ -234,6 +287,7 @@ Page{
 
                    Row{
                        width: parent.width
+                       spacing: 4
                        Column{
                            width: parent.width / 5
                            Text {
@@ -335,16 +389,18 @@ Page{
                     FileDialog {
                         id: editFileDialog
                         title: "Please choose a file"
+                        sidebarVisible: false
                         folder: shortcuts.home
                         nameFilters: [ "Image files (*.jpg *.png)"]
                         onAccepted: {
-                            console.log("chose " + fileDialog.fileUrls)
-                            console.log("Send the message to backend !")
+                            console.log("chose " + editFileDialog.fileUrls)
+                            edit_image.source = fileUrl
                         }
                         onRejected: {
                             Qt.quit()
                             console.log("Canceled")
                         }
+
                         Component.onCompleted: visible = false
                     }
 
@@ -393,7 +449,14 @@ Page{
                             id: edit_ok
                             width: parent.width / 3
                             onClicked: {
-                                editWindow.close()
+                                if(writeBck){
+                                    summoner.championStathandler(editWindow.title, stat_text_0.text, stat_text_1.text, stat_text_2.text, stat_text_3.text, stat_text_4.text, stat_text_5.text, stat_text_6.text, stat_text_7.text, stat_text_8.text, stat_text_9.text, stat_text_10.text, stat_text_11.text, stat_text_12.text, stat_text_13.text, stat_text_14.text, stat_text_15.text, stat_text_16.text, stat_text_17.text, stat_text_18.text, stat_text_19.text, false)
+                                    summoner.championInfohandler(editWindow.title, parseInt(s1.value * 10), parseInt(s2.value * 10), parseInt(s3.value * 10), parseInt(s4.value * 10), false)
+                                    summoner.championhandler(editWindow.title, edit_blurb.text, edit_image.source, edit_name.text, edit_title.text, false )
+                                    grid.model = summoner.championModel
+                                }
+                               writeBck = false;
+                               editWindow.close()
                             }
                         }
 
@@ -401,16 +464,25 @@ Page{
                             text: qsTr("<b>Delete<b>")
                             width: parent.width / 3
                             onClicked: {
-                                editWindow.close()
+                                    summoner.championStathandler(editWindow.title, stat_text_0.text, stat_text_1.text, stat_text_2.text, stat_text_3.text, stat_text_4.text, stat_text_5.text, stat_text_6.text, stat_text_7.text, stat_text_8.text, stat_text_9.text, stat_text_10.text, stat_text_11.text, stat_text_12.text, stat_text_13.text, stat_text_14.text, stat_text_15.text, stat_text_16.text, stat_text_17.text, stat_text_18.text, stat_text_19.text, true)
+                                    summoner.championInfohandler(editWindow.title, parseInt(s1.value * 10), parseInt(s2.value * 10), parseInt(s3.value * 10), parseInt(s4.value * 10), true)
+                                    summoner.championhandler(editWindow.title, edit_blurb.text, edit_image.source, edit_name.text, edit_title.text, true)
+                                    grid.model = summoner.championModel
+
+                                    writeBck = false
+                                    editWindow.close()
                             }
                         }
-
 
                         Button{
                             text: "Cancel"
                             id: edit_cancel
                             width: parent.width / 3
-                            onClicked: editWindow.close()
+
+                            onClicked: {
+                                editWindow.close()
+                                writeBck = false
+                            }
                         }
                     }
             }
@@ -429,7 +501,7 @@ Page{
                     enabled: true
                     wheelEnabled: true
                     onValueChanged: {
-                        i1.text = parseInt(value * 5)
+                        i1.text = parseInt(value * 10)
                     }
                 }
                 Label{
@@ -451,7 +523,7 @@ Page{
                     enabled: true
                     wheelEnabled: true
                     onValueChanged: {
-                        i2.text = parseInt(value * 5)
+                        i2.text = parseInt(value * 10)
                     }
                 }
                 Label{
@@ -473,7 +545,7 @@ Page{
                     enabled: true
                     wheelEnabled: true
                     onValueChanged: {
-                        i3.text = parseInt(value * 5)
+                        i3.text = parseInt(value * 10)
                     }
                 }
                 Label{
@@ -495,7 +567,7 @@ Page{
                     enabled: true
                     wheelEnabled: true
                     onValueChanged: {
-                        i4.text = parseInt(value * 5)
+                        i4.text = parseInt(value * 10)
                     }
                 }
                 Label{

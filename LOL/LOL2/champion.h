@@ -23,7 +23,7 @@ private:
     QString title;
 public:
 
-    Champion (QString blurb, QString id, QString image, int champion_key, QString name, QString title);
+    Champion (QString blurb, QString image, int champion_key, QString name, QString title);
     QString getBlurb();
     QString getId();
     QString getImage();

@@ -60,6 +60,10 @@ public slots:
     QVariant getMatchData(int match_id);
     QVariant getChampionStat(int champion_key);
     QVariant getChampionInfo(int champion_key);
+
+    void championStathandler(const int champion_key, const double armor, const double armorperlevel, const double attackdamage, const double attackdamageperlevel, const int attackrange, const double attackspeedoffset, const double attackspeedperlevel, const double crit, const double critperlevel, const int hp, const int hpperlevel, const double hpregen, const double hpregenperlevel, const int movespeed, const int mp, const int mpperlevel, const int mpregen, const int mpregenperlevel, const double spellblock, const double spellblockperlevel, const bool remove);
+    void championInfohandler(const int champion_key, const int info_attack, const int info_defense, const int info_difficulty, const int info_magic, const bool remove);
+    void championhandler(const int champion_key, const QString &blurb, const QString &image, const QString &name, const QString &title, const bool remove);
 private:
     QList<QObject*> dataList;
 
